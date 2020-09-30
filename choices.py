@@ -11,7 +11,7 @@ GENDER = (
 EMPLOYEE_CATEGORY = (
         ('t', 'Teacher'),
         ('o', 'Officer'),
-        ('s', 'Stuff')
+        ('s', 'Staff')
     )
 
 DEPARTMENT_TYPE = (
@@ -37,7 +37,7 @@ REPORT_TYPE = (
     ('s', 'Summary'),
     )
 
-ACTIVE_STATUS= (
-    ('a', 'Active'),
-    ('d', 'Disable'),
+ACTIVE_STATUS = (
+    ('active', 'Active'),
+    ('disabled', 'Disabled'),
     )
