@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
 # local apps
-from .models import Employee, Faculty, Department, UserType, Designation
+from .models import Employee, Faculty, Department, UserType, Designation, WorkRecord
 # Register your models here.
 
 admin.site.register(Employee)
@@ -9,7 +9,7 @@ admin.site.register(Faculty)
 admin.site.register(Department)
 admin.site.register(UserType)
 admin.site.register(Designation)
-
+admin.site.register(WorkRecord)
 
 
 @admin.register(LogEntry)

@@ -41,3 +41,11 @@ ACTIVE_STATUS = (
     ('active', 'Active'),
     ('disabled', 'Disabled'),
     )
+TYPE = (
+    ('year', 'Year'),
+)
+
+ASSIGNED_RETURNED_STATUS = (
+    ('assigned', 'Assigned'),
+    ('returned', 'Returned'),
+)

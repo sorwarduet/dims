@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save
 
 # local
-from dims.choices import DEPARTMENT_TYPE, GENDER, ACTIVE_STATUS
+from .choices import DEPARTMENT_TYPE, GENDER, ACTIVE_STATUS
 
 
 class TimeStampedModel(models.Model):
@@ -96,6 +96,29 @@ class Designation(TimeStampedModel):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Designation, self).save(*args, **kwargs)
+
+
+class WorkRecord(TimeStampedModel):
+    role_name = models.CharField(max_length=100)
+    isAdditional = models.BooleanField()
+    description = models.TextField(blank=True, null=True)
+    assign_date = models.DateField(blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
+
+    slug = models.SlugField(editable=False)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                                   related_name='%(class)s_created_by')
+    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name='%(class)s_modified_by')
+
+    def __str__(self):
+        return self.role_name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.role_name)
+        super(WorkRecord, self).save(*args, **kwargs)
 
 
 class Employee(TimeStampedModel):
