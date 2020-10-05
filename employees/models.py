@@ -21,9 +21,9 @@ class TimeStampedModel(models.Model):
 
 
 class Faculty(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     code = models.CharField(max_length=20, blank=True, null=True)
-    acronym = models.CharField(max_length=200, blank=True, null=True)
+    acronym = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     office_type = models.CharField(max_length=10, choices=DEPARTMENT_TYPE, default='ac')
     slug = models.SlugField(editable=False)
@@ -37,7 +37,7 @@ class Faculty(TimeStampedModel):
 
 
 class Department(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     code = models.CharField(max_length=20, blank=True, null=True)
     acronym = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -54,7 +54,7 @@ class Department(TimeStampedModel):
 
 
 class UserType(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(editable=False)
 
@@ -67,11 +67,10 @@ class UserType(TimeStampedModel):
 
 
 class Designation(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
 
     slug = models.SlugField(editable=False)
-
 
     def __str__(self):
         return self.name
@@ -82,7 +81,7 @@ class Designation(TimeStampedModel):
 
 
 class WorkRecord(TimeStampedModel):
-    role_name = models.CharField(max_length=100)
+    role_name = models.CharField(max_length=200)
     isAdditional = models.BooleanField()
     description = models.TextField(blank=True, null=True)
     assign_date = models.DateField(blank=True, null=True)
@@ -105,7 +104,7 @@ class Employee(TimeStampedModel):
     address = models.TextField(max_length=300, blank=True, null=True)
     gender = models.CharField(max_length=20, choices=GENDER, blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to='employee/')
+    image = models.ImageField(blank=True, null=True, default='employee/avatar.png', upload_to='employee/')
     employee_no = models.IntegerField(blank=True, null=True)
     joining_date = models.DateField(blank=True, null=True)
     active_status = models.CharField(max_length=10, choices=ACTIVE_STATUS, default='active')

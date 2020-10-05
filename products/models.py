@@ -30,7 +30,7 @@ class TimeStampedModel(models.Model):
 
 
 class Category(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=ACTIVE_STATUS, default='active')
     parent_id = models.ForeignKey('self', blank=True, null=True, related_name='category', on_delete=models.SET_NULL)
@@ -46,12 +46,12 @@ class Category(TimeStampedModel):
 
 
 class Product(TimeStampedModel):
-    name = models.CharField(max_length=100)
-    country_of_origin = models.CharField(max_length=100, blank=True, null=True)
-    brand = models.CharField(max_length=100, blank=True, null=True)
-    model = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=200)
+    country_of_origin = models.CharField(max_length=200, blank=True, null=True)
+    brand = models.CharField(max_length=200, blank=True, null=True)
+    model = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='products/', null=True, blank=True)  # default="employee_images/product_pic.png"
+    image = models.ImageField(upload_to='products/', default='products/image.png', null=True, blank=True)  # default="employee_images/product_pic.png"
 
     slug = models.SlugField(editable=False)
 
@@ -65,7 +65,7 @@ class Product(TimeStampedModel):
 
 
 class Status(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(editable=False)
 
@@ -78,7 +78,7 @@ class Status(TimeStampedModel):
 
 
 class Location(TimeStampedModel):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(editable=False)
 
@@ -92,7 +92,7 @@ class Location(TimeStampedModel):
 
 
 class Memo(TimeStampedModel):
-    tender = models.CharField(max_length=200)
+    tender = models.CharField(max_length=255)
     date = models.DateField(null=True, blank=True)
     received_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="memos")
     slug = models.SlugField(editable=False)
@@ -107,7 +107,7 @@ class Memo(TimeStampedModel):
 
 
 class ProductItem(TimeStampedModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     actual_cost = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     depreciation = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -137,8 +137,8 @@ class NonTraceableItem(ProductItem):
 
 
 class TraceableItem(ProductItem):
-    qr_code_key = models.CharField(max_length=100, blank=True, null=True)
-    rf_id_key = models.CharField(max_length=100, blank=True, null=True)
+    qr_code_key = models.CharField(max_length=200, blank=True, null=True)
+    rf_id_key = models.CharField(max_length=200, blank=True, null=True)
     expiry_date = models.DateField(blank=True, null=True)
 
     # create type beforehand. check employee/models -> employee -> gender
@@ -149,8 +149,8 @@ class TraceableItem(ProductItem):
 
 
 class Property(TimeStampedModel):
-    name = models.CharField(max_length=100)
-    value = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=200)
+    value = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
 
