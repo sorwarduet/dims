@@ -8,8 +8,9 @@ admin.site.register(Employee)
 admin.site.register(Faculty)
 admin.site.register(Department)
 admin.site.register(UserType)
-admin.site.register(Designation)
+
 admin.site.register(WorkRecord)
+admin.site.register(Designation)
 
 
 @admin.register(LogEntry)

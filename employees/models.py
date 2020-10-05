@@ -27,10 +27,6 @@ class Faculty(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
     office_type = models.CharField(max_length=10, choices=DEPARTMENT_TYPE, default='ac')
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
 
     def __str__(self):
         return self.name
@@ -47,12 +43,7 @@ class Department(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
     office_type = models.CharField(max_length=10, choices=DEPARTMENT_TYPE, default='ac')
     faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT, related_name='departments')
-
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
 
     def __str__(self):
         return self.name
@@ -65,12 +56,7 @@ class Department(TimeStampedModel):
 class UserType(TimeStampedModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
 
     def __str__(self):
         return self.name
@@ -85,10 +71,7 @@ class Designation(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
 
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
+
 
     def __str__(self):
         return self.name
@@ -106,12 +89,7 @@ class WorkRecord(TimeStampedModel):
     release_date = models.DateField(blank=True, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     department = models.ForeignKey(Department, on_delete=models.PROTECT)
-
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
 
     def __str__(self):
         return self.role_name
@@ -139,10 +117,6 @@ class Employee(TimeStampedModel):
     designation = models.ForeignKey(Designation, on_delete=models.PROTECT, related_name='designation', blank=True,
                                     null=True)
     slug = models.SlugField(editable=False)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                   related_name='%(class)s_created_by')
-    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='%(class)s_modified_by')
 
     def __str__(self):
         return self.user.username
