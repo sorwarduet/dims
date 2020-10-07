@@ -1,12 +1,12 @@
 from django.db import models
 from django.conf import settings
+
 from django.template.defaultfilters import slugify
 # local
 from .choices import ACTIVE_STATUS, TYPE, ASSIGNED_RETURNED_STATUS
 
 # local apps
 from employees.models import Department
-
 
 # Create your models here.
 
@@ -117,7 +117,7 @@ class ProductItem(TimeStampedModel):
     memo = models.ForeignKey(Memo, verbose_name='Memo', on_delete=models.PROTECT)
     resp_emp = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Employee', on_delete=models.PROTECT)
     product = models.ForeignKey(Product, verbose_name='Product', on_delete=models.CASCADE)
-    parent_id = models.ForeignKey('self', null=True,  on_delete=models.CASCADE, unique=False)
+    parent_id = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, unique=False)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     slug = models.SlugField(editable=False)
 
@@ -145,7 +145,6 @@ class TraceableItem(ProductItem):
     warranty_type = models.CharField(max_length=10, choices=TYPE)
     warranty_date = models.DateField(blank=True, null=True)
     status = models.ForeignKey(Status, verbose_name='Status', on_delete=models.PROTECT)
-
 
 
 class Property(TimeStampedModel):

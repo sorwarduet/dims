@@ -108,8 +108,6 @@ class Employee(TimeStampedModel):
     employee_no = models.IntegerField(blank=True, null=True)
     joining_date = models.DateField(blank=True, null=True)
     active_status = models.CharField(max_length=10, choices=ACTIVE_STATUS, default='active')
-
-    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT, related_name='faculty', blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.PROTECT, related_name='department', blank=True,
                                    null=True)
     userType = models.ForeignKey(UserType, on_delete=models.PROTECT, related_name='userType', blank=True, null=True)
