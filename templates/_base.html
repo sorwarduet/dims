@@ -7,17 +7,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    {% include 'lib/_styles.html' %}
+    {% include 'layouts/_styles.html' %}
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <div class="wrapper">
 
     <!-- Navbar -->
-    {% include 'lib/_main_header.html' %}
+    {% include 'layouts/_main_header.html' %}
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    {% include 'lib/_main_sideba.html' %}
+    {% include 'layouts/_main_sideba.html' %}
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -52,11 +52,11 @@
     <!-- /.content-wrapper -->
 
     <!-- footer -->
-    {% include 'lib/_main_footer.html' %}
+    {% include 'layouts/_main_footer.html' %}
     <!-- End footer -->
 
 </div>
-{% include 'lib/_scripts.html' %}
+{% include 'layouts/_scripts.html' %}
 
 </body>
 </html>
