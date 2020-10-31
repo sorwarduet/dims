@@ -17,7 +17,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-tachometer-alt nav-icon"></i>
                         <p>Home</p>
                     </a>
@@ -33,7 +33,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="far fa-user nav-icon"></i>
                                 <p>Employees</p>
                             </a>
@@ -64,9 +64,14 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                {% url 'category_list' as category_list %}
+                {% url 'category_create' as category_create %}
+                {% url 'category_update' pk as category_update %}
+                {% url 'category_delete' pk as category_delete %}
+                 {% url 'product_list'  as product_list %}
+                 {% url 'product_create' as product_create %}
+                <li class="nav-item has-treeview {% if request.path == category_list or request.path == category_create or request.path == category_delete or product_list == request.path or product_create == request.path %} menu-open {% endif %} ">
+                    <a href="#" class="nav-link {% if request.path == category_list or request.path == category_create or request.path == category_create or product_list == request.path or product_create == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>
                             Products
@@ -87,13 +92,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{% url 'product_list' %}" class="nav-link {% if product_list == request.path or product_create == request.path  %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Products</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'category_list' %} " class="nav-link">
+                            <a href="{{ category_list }} " class="nav-link {% if category_list == request.path or request.path == category_update %} active {% endif %} ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
                             </a>
@@ -105,7 +110,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{% url 'location_list' %}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Location</p>
                             </a>

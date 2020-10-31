@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% block title %}
-    Delete Location
+    Delete Product
 {% endblock %}
 
 {% block content %}
@@ -11,12 +11,12 @@
                 <h2 class="text-center text-danger">Are You Sure Delete?</h2>
             </div>
             <div class="card-body">
-                <p>{{ location.name }}</p>
+                <p>{{ product.name }}</p>
             </div>
             <div class="card-footer">
                 <form method="post">
                     {% csrf_token %}
-                    <a href="{% url 'category_list' %}" class="btn btn-default">No</a>
+                    <a href="{% url 'product_list' %}" class="btn btn-default">No</a>
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </form>
             </div>

@@ -1,12 +1,96 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # local model
-from .models import Category
+from .models import Category, Product, Location
+from .forms import CategoryForm, ProductForm, LocationForm
+
+
 # Create your views here.
 
+# Category View
 
 class CategoryListView(ListView):
     template_name = 'products/category/category_list.html'
     model = Category
     context_object_name = "categories"
+
+
+class CategoryCreateView(CreateView):
+    template_name = 'products/category/category_add.html'
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    template_name = 'products/category/category_edit.html'
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('category_list')
+
+
+class CategoryDeleteView(DeleteView):
+    template_name = 'products/category/category_delete.html'
+    model = Category
+    context_object_name = 'category'
+    success_url = reverse_lazy('category_list')
+
+
+# Product view
+
+class ProductListView(ListView):
+    template_name = 'products/product/product_list.html'
+    model = Product
+    context_object_name = "products"
+
+
+class ProductCreateView(CreateView):
+    template_name = 'products/product/product_add.html'
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('product_list')
+
+
+class ProductUpdateView(UpdateView):
+    template_name = 'products/product/product_edit.html'
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('product_list')
+
+
+class ProductDeleteView(DeleteView):
+    template_name = 'products/product/product_delete.html'
+    model = Product
+    context_object_name = 'product'
+    success_url = reverse_lazy('product_list')
+
+# location View
+
+
+class LocationListView(ListView):
+    template_name = 'products/location/location_list.html'
+    model = Location
+    context_object_name = "locations"
+
+
+class LocationCreateView(CreateView):
+    template_name = 'products/location/location_add.html'
+    model = Location
+    form_class = LocationForm
+    success_url = reverse_lazy('location_list')
+
+
+class LocationUpdateView(UpdateView):
+    template_name = 'products/location/location_edit.html'
+    model = Location
+    form_class = LocationForm
+    success_url = reverse_lazy('location_list')
+
+
+class LocationDeleteView(DeleteView):
+    template_name = 'products/location/location_delete.html'
+    model = Location
+    context_object_name = 'location'
+    success_url = reverse_lazy('location_list')

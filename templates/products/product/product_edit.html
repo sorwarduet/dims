@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% block title %}
-    Add Category
+    Edit Product
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
                 {% csrf_token %}
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Add Category</h3>
+                        <h3 class="card-title">Edit Product</h3>
                     </div>
                     <!-- /.card-header -->
 
@@ -28,7 +28,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">SUBMIT</button>
-                        <a href="{% url 'category_list' %}" class="btn btn-default float-right ">Cancel</a>
+                        <a href="{% url 'product_list' %}" class="btn btn-default float-right ">Cancel</a>
                     </div>
                 </div>
             </form>

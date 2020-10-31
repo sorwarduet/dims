@@ -7,7 +7,7 @@
               <div class="card-header">
                 <h3 class="card-title">Category Table</h3>
                   <div class="float-right">
-                      <a class="btn-sm bg-info">
+                      <a class="btn-sm bg-info" href="{% url 'category_create' %}">
                       <i class="fas fa-plus"></i> Add
                   </a>
                   </div>
@@ -23,7 +23,7 @@
                 </colgroup>
                   <thead>
                   <tr>
-                    <th>Category</th>
+                    <th>Name</th>
                     <th>Description</th>
                     <th>status</th>
                     <th>Action</th>
@@ -36,10 +36,10 @@
                         <td>{{ category.description }}</td>
                         <td>{{ category.status }}</td>
                         <td class="text-center">
-                           <a class="btn-sm bg-info">
+                           <a class="btn-sm bg-info" href="{% url 'category_update' category.pk %}">
                               <i class="fas fa-edit"></i> Edit
                             </a>
-                            <a class="ml-3 btn-sm bg-danger">
+                            <a class="ml-3 btn-sm bg-danger" href="{% url 'category_delete' category.pk %}">
                               <i class="fas fa-times"></i> Delete
                             </a>
                         </td>
@@ -48,7 +48,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                      <th>Category</th>
+                      <th>Name</th>
                     <th>Description</th>
                     <th>status</th>
                     <th>Action</th>

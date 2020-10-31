@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '_base.html' %}
+{% block title %}
+    Edit Category
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+    <div class="row">
+        <div class="col-8 m-auto">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Category</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                     {% for field in form %}
+                            <div class="form-group">
+                                {{ field.errors }}
+                                {{ field.label_tag }}
+                                {{ field }}
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                        <a href="{% url 'category_list' %}" class="btn btn-default float-right ">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
