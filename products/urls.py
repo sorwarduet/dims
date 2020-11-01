@@ -17,4 +17,14 @@ urlpatterns = [
     path('location/update/<int:pk>', LocationUpdateView.as_view(), name='location_update'),
     path('location/delete/<int:pk>', LocationDeleteView.as_view(), name='location_delete'),
 
+    path('status/', StatusListView.as_view(), name='status_list'),
+    path('status/create', StatusCreateView.as_view(), name='status_create'),
+    path('status/update/<int:pk>', StatusUpdateView.as_view(), name='status_update'),
+    path('status/delete/<int:pk>', StatusDeleteView.as_view(), name='status_delete'),
+
+    path('memo/', MemoListView.as_view(), name='memo_list'),
+    path('memo/create', MemoCreateView.as_view(), name='memo_create'),
+    path('memo/update/<int:pk>', MemoUpdateView.as_view(), name='memo_update'),
+    path('memo/delete/<int:pk>', MemoDeleteView.as_view(), name='memo_delete'),
+
 ]

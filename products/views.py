@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # local model
-from .models import Category, Product, Location
-from .forms import CategoryForm, ProductForm, LocationForm
+from .models import Category, Product, Location, Status, Memo
+from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm
 
 
 # Create your views here.
@@ -94,3 +94,64 @@ class LocationDeleteView(DeleteView):
     model = Location
     context_object_name = 'location'
     success_url = reverse_lazy('location_list')
+
+
+# Status View
+
+
+class StatusListView(ListView):
+    template_name = 'products/status/status_list.html'
+    model = Status
+    context_object_name = "status"
+
+
+class StatusCreateView(CreateView):
+    template_name = 'products/status/status_add.html'
+    model = Status
+    form_class = StatusForm
+    success_url = reverse_lazy('status_list')
+
+
+class StatusUpdateView(UpdateView):
+    template_name = 'products/status/status_edit.html'
+    model = Status
+    form_class = StatusForm
+    success_url = reverse_lazy('status_list')
+
+
+class StatusDeleteView(DeleteView):
+    template_name = 'products/status/status_delete.html'
+    model = Status
+    context_object_name = 'status'
+    success_url = reverse_lazy('status_list')
+
+
+# Memo View
+
+
+class MemoListView(ListView):
+    template_name = 'products/memo/memo_list.html'
+    model = Memo
+    context_object_name = "memos"
+
+
+class MemoCreateView(CreateView):
+    template_name = 'products/memo/memo_add.html'
+    model = Memo
+    form_class = MemoForm
+    success_url = reverse_lazy('memo_list')
+
+
+class MemoUpdateView(UpdateView):
+    template_name = 'products/memo/memo_edit.html'
+    model = Memo
+    form_class = MemoForm
+    success_url = reverse_lazy('memo_list')
+
+
+class MemoDeleteView(DeleteView):
+    template_name = 'products/memo/memo_delete.html'
+    model = Memo
+    context_object_name = 'memo'
+    success_url = reverse_lazy('memo_list')
+

@@ -1,5 +1,6 @@
 from django import forms
-from .models import Category, Product, Location
+from django.forms.widgets import DateInput
+from .models import Category, Product, Location, Memo, Status
 
 
 class CategoryForm(forms.ModelForm):
@@ -47,4 +48,32 @@ class LocationForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+        }
+
+
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = Status
+        fields = (
+            'name',
+            'description',
+        )
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+        }
+
+
+class MemoForm(forms.ModelForm):
+    class Meta:
+        model = Memo
+        fields = (
+            'tender',
+            'date',
+            'received_by',
+        )
+        widgets = {
+            'tender': forms.TextInput(attrs={'class': 'form-control'}),
+            'date': DateInput(attrs={'class': 'form-control'}),
+            'received_by': forms.Select(attrs={'class': 'form-control'}),
         }

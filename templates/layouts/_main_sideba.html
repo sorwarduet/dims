@@ -66,12 +66,25 @@
                 </li>
                 {% url 'category_list' as category_list %}
                 {% url 'category_create' as category_create %}
-                {% url 'category_update' pk as category_update %}
-                {% url 'category_delete' pk as category_delete %}
-                 {% url 'product_list'  as product_list %}
-                 {% url 'product_create' as product_create %}
-                <li class="nav-item has-treeview {% if request.path == category_list or request.path == category_create or request.path == category_delete or product_list == request.path or product_create == request.path %} menu-open {% endif %} ">
-                    <a href="#" class="nav-link {% if request.path == category_list or request.path == category_create or request.path == category_create or product_list == request.path or product_create == request.path %} active {% endif %}">
+                {% url 'category_update' category.pk as category_update %}
+                {% url 'category_delete' category.pk as category_delete %}
+                {% url 'product_list'  as product_list %}
+                {% url 'product_create' as product_create %}
+                {% url 'location_list' as location_list %}
+                {% url 'location_create' as location_create %}
+                {% url 'status_list' as status_list %}
+                {% url 'status_create' as status_create %}
+                {% url 'memo_list' as memo_list %}
+                {% url 'memo_create' as memo_create %}
+
+                <li class="nav-item has-treeview
+                    {% if request.path == category_list or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path %}
+                         menu-open
+                    {% endif %} ">
+                    <a href="#"
+                       class="nav-link {% if request.path == category_list or request.path == category_create or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path %}
+                             active
+                        {% endif %}">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>
                             Products
@@ -92,31 +105,34 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'product_list' %}" class="nav-link {% if product_list == request.path or product_create == request.path  %} active {% endif %}">
+                            <a href="{% url 'product_list' %}"
+                               class="nav-link {% if product_list == request.path or product_create == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Products</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ category_list }} " class="nav-link {% if category_list == request.path or request.path == category_update %} active {% endif %} ">
+                            <a href="{{ category_list }} "
+                               class="nav-link {% if category_list == request.path or request.path == category_update %} active {% endif %} ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{% url 'status_list' %}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Status</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'location_list' %}" class="nav-link">
+                            <a href="{% url 'location_list' %}"
+                               class="nav-link {% if location_list == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Location</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{% url 'memo_list' %}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Memo</p>
                             </a>
