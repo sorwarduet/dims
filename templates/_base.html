@@ -8,6 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
     {% include 'layouts/_styles.html' %}
+    {% block custom_css %}
+
+    {% endblock custom_css %}
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 <div class="wrapper">
@@ -57,11 +60,9 @@
 
 </div>
 {% include 'layouts/_scripts.html' %}
-<script>
-    {% block scripts %}
+{% block custom_js %}
 
-    {% endblock %}
-</script>
+{% endblock custom_js %}
 
 </body>
 </html>
