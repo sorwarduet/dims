@@ -27,4 +27,9 @@ urlpatterns = [
     path('memo/update/<int:pk>', MemoUpdateView.as_view(), name='memo_update'),
     path('memo/delete/<int:pk>', MemoDeleteView.as_view(), name='memo_delete'),
 
+    path('productItem/', ProductItemListView.as_view(), name='product_item_list'),
+    path('productItem/create', ProductItemCreateView.as_view(), name='product_item_create'),
+    path('productItem/update/<int:pk>', ProductItemUpdateView.as_view(), name='product_item_update'),
+    path('productItem/delete/<int:pk>', ProductItemDeleteView.as_view(), name='product_item_delete'),
+
 ]

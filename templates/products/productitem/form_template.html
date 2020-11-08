@@ -1,0 +1,52 @@
+<form role="form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-body">
+        <div class="form-group">
+            {% if messages %}
+                {% for message in messages %}
+
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <div class="form-row">
+            {% for field in form %}
+                {% if forloop.last %}
+                    <div class="form-group col-md-12">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    </div>
+               {% else %}
+                <div class="form-group col-md-6">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                 {% endif %}
+            {% endfor %}
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">
+                {% if button_text %}
+                    {{ button_text }}
+                {% else %}
+                    Submit
+                {% endif %}
+            </button>
+            <a href="{% url 'product_item_list' %}" class="btn btn-default float-right ">Cancel</a>
+        </div>
+</form>

@@ -12,6 +12,7 @@ class Command(BaseCommand):
         Designation(name='Assistant Professor').save()
         Designation(name='Lecturer').save()
         Designation(name='System Analyst').save()
+        Designation(name='Assistant Programmer').save()
         Designation(name='Assistant Maintenance Engineer').save()
         Designation(name='Junior Maintenance Officer').save()
         Designation(name='Assistant Section Officer').save()

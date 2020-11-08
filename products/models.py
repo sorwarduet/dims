@@ -82,7 +82,6 @@ class Location(TimeStampedModel):
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(editable=False)
 
-
     def __str__(self):
         return self.name
 
@@ -94,9 +93,8 @@ class Location(TimeStampedModel):
 class Memo(TimeStampedModel):
     tender = models.CharField(max_length=255)
     date = models.DateField(null=True, blank=True)
-    received_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="memos")
+    received_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True,  related_name="memos")
     slug = models.SlugField(editable=False)
-
 
     def __str__(self):
         return self.tender
@@ -112,17 +110,25 @@ class ProductItem(TimeStampedModel):
     depreciation = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     purchase_date = models.DateField(verbose_name='Purchase Date', blank=True, null=True)
-    department = models.ForeignKey(Department, verbose_name='Department', on_delete=models.PROTECT)
-    location = models.ForeignKey(Location, verbose_name='Location', on_delete=models.PROTECT)
-    memo = models.ForeignKey(Memo, verbose_name='Memo', on_delete=models.PROTECT)
-    resp_emp = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Employee', on_delete=models.PROTECT)
+    department = models.ForeignKey(Department, verbose_name='Department', on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, verbose_name='Location', on_delete=models.CASCADE)
+    memo = models.ForeignKey(Memo, verbose_name='Memo', on_delete=models.CASCADE)
+    resp_emp = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Employee', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, verbose_name='Product', on_delete=models.CASCADE)
     parent_id = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, unique=False)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    slug = models.SlugField(editable=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    class Meta:
-        abstract = True
+    quantity = models.DecimalField(max_digits=15, decimal_places=2)
+
+    qr_code_key = models.CharField(max_length=200, blank=True, null=True)
+    rf_id_key = models.CharField(max_length=200, blank=True, null=True)
+    expiry_date = models.DateField(blank=True, null=True)
+
+    # create type beforehand. check employee/models -> employee -> gender
+    warranty_type = models.CharField(max_length=10, choices=TYPE, blank=True, null=True )
+    warranty_date = models.DateField(blank=True, null=True)
+    status = models.ForeignKey(Status, verbose_name='Status', on_delete=models.DO_NOTHING, null=True, blank=True)
+    slug = models.SlugField(editable=False)
 
     def __str__(self):
         return self.name
@@ -130,21 +136,6 @@ class ProductItem(TimeStampedModel):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(ProductItem, self).save(*args, **kwargs)
-
-
-class NonTraceableItem(ProductItem):
-    quantity = models.DecimalField(max_digits=15, decimal_places=2)
-
-
-class TraceableItem(ProductItem):
-    qr_code_key = models.CharField(max_length=200, blank=True, null=True)
-    rf_id_key = models.CharField(max_length=200, blank=True, null=True)
-    expiry_date = models.DateField(blank=True, null=True)
-
-    # create type beforehand. check employee/models -> employee -> gender
-    warranty_type = models.CharField(max_length=10, choices=TYPE)
-    warranty_date = models.DateField(blank=True, null=True)
-    status = models.ForeignKey(Status, verbose_name='Status', on_delete=models.PROTECT)
 
 
 class Property(TimeStampedModel):
@@ -167,14 +158,14 @@ class Property(TimeStampedModel):
 
 
 class ItemAssign(TimeStampedModel):
-    product_item = models.ForeignKey(TraceableItem, on_delete=models.PROTECT)
-    assigned_employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
+    assigned_employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
     assigned_date = models.DateField(blank=True, null=True)
     return_date = models.DateField(blank=True, null=True)
     assigned_quantity = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     assigned_returned_status = models.CharField(max_length=10, choices=ASSIGNED_RETURNED_STATUS)
-    assigned_location = models.ForeignKey(Location, verbose_name='Assigned Location', on_delete=models.PROTECT)
+    assigned_location = models.ForeignKey(Location, verbose_name='Assigned Location', on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -189,7 +180,7 @@ class ItemAssign(TimeStampedModel):
 class PersonalLoan(TimeStampedModel):
     loan_date = models.DateField()
     description = models.TextField(blank=True, null=True)
-    to_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    to_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.to_id.username
@@ -199,7 +190,7 @@ class PersonalLoanItem(TimeStampedModel):
     loan_pay_off_time = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
     personalLoan = models.ForeignKey(PersonalLoan, on_delete=models.CASCADE)
-    product_item = models.ForeignKey(TraceableItem, on_delete=models.PROTECT)
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=ASSIGNED_RETURNED_STATUS)
 
     def __str__(self):
@@ -215,7 +206,7 @@ class PersonalLoanItem(TimeStampedModel):
 class Repair(TimeStampedModel):
     repair_request_date = models.DateField()
     description = models.TextField(blank=True, null=True)
-    res_employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    res_employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.repair_request_date
@@ -227,7 +218,7 @@ class RepairItem(TimeStampedModel):
     estimated_cost = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     repair = models.ForeignKey(Repair, on_delete=models.CASCADE)
-    product_item = models.ForeignKey(TraceableItem, on_delete=models.PROTECT)
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=ASSIGNED_RETURNED_STATUS)
     repair_location = models.CharField(max_length=200, blank=True, null=True)
 

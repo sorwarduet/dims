@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # local model
-from .models import Category, Product, Location, Status, Memo
-from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm
+from .models import Category, Product, Location, Status, Memo, ProductItem
+from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm
 
 
 # Create your views here.
@@ -155,3 +155,32 @@ class MemoDeleteView(DeleteView):
     context_object_name = 'memo'
     success_url = reverse_lazy('memo_list')
 
+
+# product Item view
+
+
+class ProductItemListView(ListView):
+    template_name = 'products/productitem/product_item_list.html'
+    model = ProductItem
+    context_object_name = "product_items"
+
+
+class ProductItemCreateView(CreateView):
+    template_name = 'products/productitem/product_item_add.html'
+    model = ProductItem
+    form_class = ProductItemForm
+    success_url = reverse_lazy('product_item_list')
+
+
+class ProductItemUpdateView(UpdateView):
+    template_name = 'products/productitem/product_item_edit.html'
+    model = ProductItem
+    form_class = ProductItemForm
+    success_url = reverse_lazy('product_item_list')
+
+
+class ProductItemDeleteView(DeleteView):
+    template_name = 'products/productitem/product_item_delete.html'
+    model = ProductItem
+    context_object_name = 'product_item'
+    success_url = reverse_lazy('product_item_list')

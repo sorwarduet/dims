@@ -68,21 +68,27 @@
                 {% url 'category_create' as category_create %}
                 {% url 'category_update' category.pk as category_update %}
                 {% url 'category_delete' category.pk as category_delete %}
+
                 {% url 'product_list'  as product_list %}
                 {% url 'product_create' as product_create %}
+
                 {% url 'location_list' as location_list %}
                 {% url 'location_create' as location_create %}
+
                 {% url 'status_list' as status_list %}
                 {% url 'status_create' as status_create %}
+
                 {% url 'memo_list' as memo_list %}
                 {% url 'memo_create' as memo_create %}
+                {% url 'product_item_list' as item_list %}
+                {% url 'product_item_create' as item_create %}
 
                 <li class="nav-item has-treeview
-                    {% if request.path == category_list or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path %}
+                    {% if request.path == category_list or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path or location_create == request.path or status_list == request.path or status_create == request.path or memo_list == request.path or memo_create == request.path or request.path == item_list or request.path == item_create  %}
                          menu-open
                     {% endif %} ">
                     <a href="#"
-                       class="nav-link {% if request.path == category_list or request.path == category_create or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path %}
+                       class="nav-link {% if request.path == category_list or request.path == category_create or request.path == category_update or request.path == category_delete or product_list == request.path or product_create == request.path or location_list == request.path or location_create == request.path or status_list == request.path or status_create == request.path or memo_list == request.path or memo_create == request.path or request.path == item_list or request.path == item_create %}
                              active
                         {% endif %}">
                         <i class="nav-icon fas fa-cubes"></i>
@@ -93,15 +99,11 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{% url 'product_item_list' %}" class="nav-link {% if request.path == item_list or request.path == item_create %}
+                                active
+                            {% endif %} ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TraceableItem</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>NonTraceableItem</p>
+                                <p>ProductItem</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -119,20 +121,24 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'status_list' %}" class="nav-link">
+                            <a href="{% url 'status_list' %}" class="nav-link {% if status_list == request.path or status_create == request.path  %}
+                            active
+                            {% endif %}  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Status</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'location_list' %}"
-                               class="nav-link {% if location_list == request.path %} active {% endif %}">
+                               class="nav-link {% if location_list == request.path or location_create == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Location</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'memo_list' %}" class="nav-link">
+                            <a href="{% url 'memo_list' %}" class="nav-link {% if memo_list == request.path or memo_create == request.path  %}
+                            active
+                            {% endif %}  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Memo</p>
                             </a>

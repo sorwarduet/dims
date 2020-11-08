@@ -1,25 +1,21 @@
 {% extends '_base.html' %}
 {% block title %}
-    Add Memo
+    Edit Product Item
 {% endblock %}
 
 {% block content %}
 
     <div class="row">
-        <div class="col-8 m-auto">
+        <div class="col-12 m-auto">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Add Memo</h3>
+                        <h3 class="card-title">Edit Product Item</h3>
                     </div>
                     <!-- /.card-header -->
 
-                    {% include "products/memo/form_template.html" with messages=messages  form=form button_text="SUBMIT"%}
+                    {% include "products/productitem/form_template.html" with messages=messages  form=form button_text="Update"%}
                 </div>
         </div>
     </div>
-
-{% endblock %}
-
-{% block custom_js %}
 
 {% endblock %}
