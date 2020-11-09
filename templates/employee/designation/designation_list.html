@@ -1,0 +1,66 @@
+{% extends '_base.html' %}
+{% block title %}designation List{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><b>designation Table</b></h3>
+                    <div class="float-right">
+<!--                        <a class="btn-sm bg-info" href="">-->
+                        <a class="btn-sm bg-info" href="{% url 'designation_create' %}">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <colgroup>
+                            <col span="1" style="width: 15%;">
+                            <col span="1" style="width: 15%;">
+                            <col span="1" style="width: 15%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 15%;">
+                             <col span="1" style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for designation in designations %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ designation.name }} </td>
+                                <td>{{ faculty.description }}</td>
+                                <td class="text-center">
+                                    <a class="btn-sm bg-info" href="{% url 'designation_update' designation.pk %}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a class="ml-3 btn-sm bg-danger" href="{% url 'designation_delete' designation.pk %}">
+                                        <i class="fas fa-times"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
