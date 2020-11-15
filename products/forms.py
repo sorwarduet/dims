@@ -101,6 +101,8 @@ class ProductItemForm(forms.ModelForm):
             'expiry_date',
             'warranty_type',
             'warranty_date',
+            'serial_no',
+            'product_item_status',
             'status',
             'description',
         )
@@ -120,6 +122,8 @@ class ProductItemForm(forms.ModelForm):
             'expiry_date': DateInput(attrs={'class': 'form-control'}),
             'warranty_type': forms.Select(attrs={'class': 'form-control'}),
             'warranty_date': DateInput(attrs={'class': 'form-control'}),
+            'serial_no': forms.TextInput(attrs={'class': 'form-control'}),
+            'product_item_status': forms.Select(attrs={'class': 'form-control',}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter Description '}),
         }

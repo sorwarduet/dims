@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third party
+    'debug_toolbar',
+
     # local apps
     'employees.apps.EmployeesConfig',
     'products.apps.ProductsConfig',
@@ -56,6 +59,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Third party
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'dims.urls'
@@ -147,4 +153,13 @@ MEDIA_ROOT = MEDIA_DIR
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
+
+# for django toolbar
+
+INTERNAL_IPS = [
+
+    '127.0.0.1',
+
+]
+
 

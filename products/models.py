@@ -1,9 +1,19 @@
 from django.db import models
 from django.conf import settings
 
+
 from django.template.defaultfilters import slugify
+
+# For Qrcode
+
+import qrcode
+from io import BytesIO
+from django.core.files import File
+from PIL import Image, ImageDraw
+import string
+import random
 # local
-from .choices import ACTIVE_STATUS, TYPE, ASSIGNED_RETURNED_STATUS
+from .choices import ACTIVE_STATUS, TYPE, ASSIGNED_RETURNED_STATUS, PRODUCT_ITEM_STATUS
 
 # local apps
 from employees.models import Department
@@ -117,15 +127,19 @@ class ProductItem(TimeStampedModel):
     product = models.ForeignKey(Product, verbose_name='Product', on_delete=models.CASCADE)
     parent_id = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, unique=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # new add
+    serial_no = models.CharField(max_length=200, blank=True, null=True)
+    product_item_id = models.CharField(max_length=32, blank=True, null=True, unique=True)
+    product_item_status = models.CharField(max_length=20, blank=True, null=True, choices=PRODUCT_ITEM_STATUS )
 
-    quantity = models.DecimalField(max_digits=15, decimal_places=2)
-
-    qr_code_key = models.CharField(max_length=200, blank=True, null=True)
+    quantity = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    # Change ImageField
+    qr_code_key = models.ImageField(upload_to='qr_code/', blank=True, null=True)
     rf_id_key = models.CharField(max_length=200, blank=True, null=True)
     expiry_date = models.DateField(blank=True, null=True)
 
     # create type beforehand. check employee/models -> employee -> gender
-    warranty_type = models.CharField(max_length=10, choices=TYPE, blank=True, null=True )
+    warranty_type = models.CharField(max_length=10, choices=TYPE, blank=True, null=True)
     warranty_date = models.DateField(blank=True, null=True)
     status = models.ForeignKey(Status, verbose_name='Status', on_delete=models.DO_NOTHING, null=True, blank=True)
     slug = models.SlugField(editable=False)
@@ -133,8 +147,27 @@ class ProductItem(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def id_generator(self, size=6, chars=string.ascii_uppercase + string.digits):
+        return ''.join(random.choice(chars) for _ in range(size))
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+
+        if not self.product_item_id:
+            # Generate ID once, then check the db. If exists, keep trying.
+            self.product_item_id = self.id_generator()
+            while ProductItem.objects.filter(product_item_id=self.product_item_id).exists():
+                self.product_item_id = self.id_generator()
+
+        qrcode_img = qrcode.make(f'{self.product_item_id}')
+        width, height = qrcode_img.size
+        canvas = Image.new('RGB', (width, height), 'white')
+        canvas.paste(qrcode_img)
+        fname = f'{self.product_item_id}.png'
+        buffer = BytesIO()
+        canvas.save(buffer, 'PNG')
+        self.qr_code_key.save(fname, File(buffer), save=False)
+        canvas.close()
         super(ProductItem, self).save(*args, **kwargs)
 
 

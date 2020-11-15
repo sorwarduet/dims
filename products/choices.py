@@ -49,3 +49,8 @@ ASSIGNED_RETURNED_STATUS = (
     ('assigned', 'Assigned'),
     ('returned', 'Returned'),
 )
+
+PRODUCT_ITEM_STATUS = (
+    ('traceable', 'Traceable'),
+    ('untraceable', 'Untraceable')
+)
