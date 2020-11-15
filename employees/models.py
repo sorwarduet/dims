@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
+from  django.contrib.auth.models import User
 
 # local
 from .choices import DEPARTMENT_TYPE, GENDER, ACTIVE_STATUS
@@ -13,8 +14,11 @@ class TimeStampedModel(models.Model):
     updating ``created`` and ``modified`` fields.
     """
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)
+    modified_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    # created_by = models.ForeignKey(User, null=True, blank=True)
+    # modified_by = models.ForeignKey(User, null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -129,3 +133,15 @@ def create_user_employee(sender, instance, created, **kwargs):
 
 
 post_save.connect(create_user_employee, sender=settings.AUTH_USER_MODEL)
+
+
+def delete_employee_user(sender, instance=None, **kwargs):
+    try:
+        instance.user
+    except User.DoesNotExist:
+        pass
+    else:
+        instance.user.delete()
+
+
+post_delete.connect(delete_employee_user, sender=Employee)

@@ -11,12 +11,12 @@
                 <h2 class="text-center text-danger">Are You Sure Delete?</h2>
             </div>
             <div class="card-body">
-                <p>{{ desingation.name }}</p>
+                <p>{{ designation.name }}</p>
             </div>
             <div class="card-footer">
                 <form method="post">
                     {% csrf_token %}
-                    <a href="{% url 'desingation_list' %}" class="btn btn-default">No</a>
+                    <a href="{% url 'designation_list' %}" class="btn btn-default">No</a>
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </form>
             </div>
