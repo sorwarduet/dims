@@ -54,7 +54,7 @@ class FacultyUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('faculty_list')
 
 
-class FacultyDeleteView(LoginRequiredMixin,DeleteView):
+class FacultyDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/faculty/faculty_delete.html'
     model = Faculty
     context_object_name = 'faculty'

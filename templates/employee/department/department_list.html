@@ -15,14 +15,14 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped table-sm">
                         <colgroup>
-                            <col span="1" style="width: 15%;">
-                            <col span="1" style="width: 15%;">
-                            <col span="1" style="width: 15%;">
-                            <col span="1" style="width: 20%;">
-                            <col span="1" style="width: 15%;">
-                             <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 5%;">
+                            <col span="1" style="width: 30%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 30%;">
+                             <col span="1" style="width: 15%;">
                         </colgroup>
                         <thead>
                         <tr>
@@ -30,8 +30,6 @@
                             <th>Name</th>
                             <th>Code</th>
                             <th>Acronym</th>
-                            <th>Description</th>
-                            <th>Office Type</th>
                             <th>Faculty</th>
                             <th>Action</th>
                         </tr>
@@ -43,16 +41,27 @@
                                 <td>{{ department.name }} </td>
                                 <td>{{ department.code }}</td>
                                 <td>{{ department.acronym }}</td>
-                                <td>{{ department.description }}</td>
-                                <td>{{ department.office_type }}</td>
                                 <td>{{ department.faculty }}</td>
+
                                 <td class="text-center">
-                                    <a class="btn-sm bg-info" href="{% url 'department_update' department.pk %}">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <a class="ml-3 btn-sm bg-danger" href="{% url 'department_delete' department.pk %}">
-                                        <i class="fas fa-times"></i> Delete
-                                    </a>
+                                    <div class="btn-group">
+                                      <button type="button" class="btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                      </button>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                          <a class="dropdown-item" href="{% url 'department_update' department.pk %}">
+                                                <i class="fas fa-eye"></i> View
+                                          </a>
+                                          <a class="dropdown-item" href="{% url 'department_update' department.pk %}">
+                                                <i class="fas fa-edit"></i> Edit
+                                          </a>
+
+                                           <a class="dropdown-item" href="{% url 'department_delete' department.pk %}">
+                                                <i class="fas fa-times"></i> Delete
+                                          </a>
+
+                                      </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -63,8 +72,6 @@
                             <th>Name</th>
                             <th>Code</th>
                             <th>Acronym</th>
-                            <th>Description</th>
-                            <th>Office Type</th>
                             <th>Faculty</th>
                             <th>Action</th>
                         </tr>

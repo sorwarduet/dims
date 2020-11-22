@@ -15,7 +15,7 @@ EMPLOYEE_CATEGORY = (
     )
 
 DEPARTMENT_TYPE = (
-        ('ac' , "Academic"),
+        ('ac', "Academic"),
         ('ad', 'Administrative')
     )
 PAYMENT_TYPE = (

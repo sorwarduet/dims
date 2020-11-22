@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from employees.models import Faculty, Department, UserType, Designation, Employee
-
+from datetime import  date
 
 class Command(BaseCommand):
     help = 'our help string comes here'
@@ -11,6 +11,7 @@ class Command(BaseCommand):
         Designation(name='Associate Professor').save()
         Designation(name='Assistant Professor').save()
         Designation(name='Lecturer').save()
+        Designation(name='Deputy Registrar').save()
         Designation(name='System Analyst').save()
         Designation(name='Assistant Programmer').save()
         Designation(name='Assistant Maintenance Engineer').save()
@@ -19,20 +20,47 @@ class Command(BaseCommand):
         Designation(name='System Analyst').save()
 
     def _create_faculty(self):
-        pass
+        Faculty(name='Civil Engineering').save()
+        Faculty(name='Electrical Electronic Engineering').save()
+        Faculty(name='Mechanical Engineering').save()
+        Faculty(name='science').save()
+        Faculty(name='Administrative Offices').save()
+        Faculty(name='Office of the Directors').save()
 
     def _create_department(self):
-        pass
+        faculty_eee = Faculty.objects.get(slug='electrical-electronic-engineering')
+        faculty_ce = Faculty.objects.get(slug='civil-engineering')
+        faculty_me = Faculty.objects.get(slug='mechanical-engineering')
+        faculty_s = Faculty.objects.get(slug='science')
+        faculty_ao = Faculty.objects.get(slug='administrative-offices')
+        faculty_od = Faculty.objects.get(slug='office-of-the-directors')
+
+        Department(name='Computer Science and Engineering', acronym='CSE',  office_type='ac', faculty=faculty_eee).save()
+        Department(name='Electrical Electronics Engineering', acronym='EEE',  office_type='ac', faculty=faculty_eee).save()
+        Department(name='Mechanical Engineering', acronym='ME', office_type='ac', faculty=faculty_me,).save()
+        Department(name='Civil Engineering', acronym='CE', office_type='ac', faculty=faculty_ce).save()
+        Department(name='Textile Engineering', acronym='TE',  office_type='ac',faculty=faculty_me).save()
+        Department(name='Industrial Production Engineering', acronym='IPE', office_type='ac', faculty=faculty_me).save()
+        Department(name='Architecture', acronym='ARCH', office_type='ac', faculty=faculty_ce).save()
+        Department(name='Exam Section', office_type='ad', faculty=faculty_ao).save()
+        Department(name='Controller Section', office_type='ad', faculty=faculty_ao).save()
+        Department(name='ICT Cell', office_type='ad', faculty=faculty_ao).save()
+        Department(name='Transport Section', office_type='ad', faculty=faculty_od).save()
 
     def _create_user_type(self):
-        pass
+        UserType(name='Teacher').save()
+        UserType(name='Officer').save()
+        UserType(name='Staff').save()
+
 
     def _create_employee(self):
-        pass
+
+        User(username='masud', email='masud@duet.ac.bd', first_name='Imran', last_name='Masud', password='1234', is_staff=True).save()
+
 
     def handle(self, *args, **options):
-        self._create_designation()
-        self._create_faculty()
-        self._create_department()
-        self._create_user_type()
+        #self._create_designation()
+        #self._create_faculty()
+        #self._create_department()
+        #self._create_user_type()
         self._create_employee()

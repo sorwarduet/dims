@@ -1,63 +1,78 @@
 {% extends '_base.html' %}
 {% block title %}Category List{% endblock %}
 {% block content %}
-        <div class="row">
-          <div class="col-12">
-              <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Category Table</h3>
-                  <div class="float-right">
-                      <a class="btn-sm bg-info" href="{% url 'category_create' %}">
-                      <i class="fas fa-plus"></i> Add
-                  </a>
-                  </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                <colgroup>
-                   <col span="1" style="width: 25%;">
-                   <col span="1" style="width: 35%;">
-                   <col span="1" style="width: 15%;">
-                    <col span="1" style="width: 25%;">
-                </colgroup>
-                  <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>status</th>
-                    <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {% for category in categories %}
-                     <tr>
-                        <td>{{ category.name }}</td>
-                        <td>{{ category.description }}</td>
-                        <td>{{ category.status }}</td>
-                        <td class="text-center">
-                           <a class="btn-sm bg-info" href="{% url 'category_update' category.pk %}">
-                              <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a class="ml-3 btn-sm bg-danger" href="{% url 'category_delete' category.pk %}">
-                              <i class="fas fa-times"></i> Delete
-                            </a>
-                        </td>
-                  </tr>
-                  {% endfor %}
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                      <th>Name</th>
-                    <th>Description</th>
-                    <th>status</th>
-                    <th>Action</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Category Table</h3>
+                    <div class="float-right">
+                        <a class="btn-sm bg-info" href="{% url 'category_create' %}">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped table-sm">
+                        <colgroup>
+                             <col span="1" style="width: 5%;">
+                            <col span="1" style="width: 30%;">
+                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 15%;">
+                            <col span="1" style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.description }}</td>
+                                <td>{{ category.status }}</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn-sm btn-info dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="{% url 'category_update' category.pk %}">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+
+                                            <a class="dropdown-item" href="{% url 'category_delete' category.pk %}">
+                                                <i class="fas fa-times"></i> Delete
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>SL</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>status</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
             </div>
-          </div>
         </div>
+    </div>
 {% endblock %}

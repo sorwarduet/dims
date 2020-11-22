@@ -22,9 +22,33 @@
                         <p>Home</p>
                     </a>
                 </li>
+                 {% url 'employee_list' as  employee_list %}
+                 {% url 'employee_delete' employee.pk as  employee_delete %}
+                 {% url 'employee_update' employee.pk as  employee_update %}
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                 {% url 'faculty_list'  as  faculty_list %}
+                {% url 'faculty_create' as  faculty_create %}
+                 {% url 'faculty_delete' faculty.pk as  faculty_delete %}
+                {% url 'faculty_update' faculty.pk as  faculty_update %}
+
+                 {% url 'department_list' as  department_list %}
+                {% url 'department_create' as  department_create %}
+                 {% url 'department_delete' department.pk as  department_delete %}
+                {% url 'department_update' department.pk as  department_update %}
+
+                 {% url 'designation_list' as  designation_list %}
+                 {% url 'designation_create' as  designation_create %}
+                {% url 'designation_delete' designation.pk  as  designation_delete %}
+                 {% url 'designation_update' designation.pk as  designation_update %}
+
+                <li class="nav-item has-treeview
+                    {% if request.path == employee_list or  request.path == faculty_list or  request.path == department_list or  request.path == designation_list %}
+                          menu-open
+                    {% endif %} ">
+                    <a href="#" class="nav-link
+                    {% if request.path == employee_list or  request.path == faculty_list or  request.path == department_list or  request.path == designation_list %}
+                        active
+                    {% endif %}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users Management
@@ -33,27 +57,42 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{% url 'employee_list' %}" class="nav-link">
+                            <a href="{% url 'employee_list' %}" class="nav-link {% if request.path == employee_list %}
+                                active
+                            {% endif %} ">
                                 <i class="far fa-user nav-icon"></i>
                                 <p>Employees</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'faculty_list' %}" class="nav-link">
+                            <a href="{% url 'faculty_list' %}" class="nav-link {% if request.path == faculty_list %}
+                                active
+                            {% endif %}  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Faculty</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'department_list' %}" class="nav-link">
+                            <a href="{% url 'department_list' %}" class="nav-link {% if request.path == department_list %}
+                                active
+                            {% endif %}  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Department</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'designation_list' %}" class="nav-link">
+                            <a href="{% url 'designation_list' %}" class="nav-link{% if request.path == designation_list %}
+                                active
+                            {% endif %}  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Designation</p>
+                            </a>
+                        </li>
+                    <li class="nav-item">
+                            <a href="#" class="nav-link">
+
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Work Record</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -14,15 +14,17 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-striped table-sm">
                         <colgroup>
-                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 5%;">
                             <col span="1" style="width: 40%;">
-                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 40%;">
+                            <col span="1" style="width: 15%;">
 
                         </colgroup>
                         <thead>
                         <tr>
+                            <th>SL</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Action</th>
@@ -32,15 +34,27 @@
                        {% if locations %}
                            {% for location in locations %}
                             <tr>
+                                <td>{{ forloop.counter }}</td>
                                 <td>{{ location.name }}</td>
                                 <td>{{ location.description }}</td>
+
                                 <td class="text-center">
-                                    <a class="btn-sm bg-info" href="{% url 'location_update' location.pk %}">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <a class="ml-3 btn-sm bg-danger" href="{% url 'location_delete' location.pk %}">
-                                        <i class="fas fa-times"></i> Delete
-                                    </a>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn-sm btn-info dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="{% url 'location_update' location.pk %}">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+
+                                            <a class="dropdown-item" href="{% url 'location_delete' location.pk %}">
+                                                <i class="fas fa-times"></i> Delete
+                                            </a>
+
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -51,6 +65,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th>SL</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Action</th>
