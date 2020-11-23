@@ -1,0 +1,3146 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.5 (Ubuntu 12.5-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.5 (Ubuntu 12.5-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE ONLY public.products_repairitem DROP CONSTRAINT products_repairitem_repair_id_01dad6af_fk_products_repair_id;
+ALTER TABLE ONLY public.products_repairitem DROP CONSTRAINT products_repairitem_product_item_id_20122b1f_fk_products_;
+ALTER TABLE ONLY public.products_repair DROP CONSTRAINT products_repair_res_employee_id_26382dfd_fk_auth_user_id;
+ALTER TABLE ONLY public.products_property DROP CONSTRAINT products_property_product_id_id_606b9fac_fk_products_product_id;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_status_id_7656f2ac_fk_products_status_id;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_resp_emp_id_feddb475_fk_auth_user_id;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_product_id_d6169ae3_fk_products_product_id;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_parent_id_id_f1495936_fk_products_;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_memo_id_0ac60709_fk_products_memo_id;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_location_id_0106bf47_fk_products_;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_department_id_2001da23_fk_employees;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_category_id_b1c23f68_fk_products_;
+ALTER TABLE ONLY public.products_personalloan DROP CONSTRAINT products_personalloan_to_id_id_d8da9c78_fk_auth_user_id;
+ALTER TABLE ONLY public.products_personalloanitem DROP CONSTRAINT products_personalloa_product_item_id_a049a074_fk_products_;
+ALTER TABLE ONLY public.products_personalloanitem DROP CONSTRAINT "products_personalloa_personalLoan_id_8ec1b257_fk_products_";
+ALTER TABLE ONLY public.products_memo DROP CONSTRAINT products_memo_received_by_id_1127a489_fk_auth_user_id;
+ALTER TABLE ONLY public.products_itemassign DROP CONSTRAINT products_itemassign_product_item_id_8e1c69da_fk_products_;
+ALTER TABLE ONLY public.products_itemassign DROP CONSTRAINT products_itemassign_assigned_location_id_46e0741b_fk_products_;
+ALTER TABLE ONLY public.products_itemassign DROP CONSTRAINT products_itemassign_assigned_employee_id_1ba294af_fk_auth_user;
+ALTER TABLE ONLY public.products_category DROP CONSTRAINT products_category_parent_id_id_bfe88eb6_fk_products_category_id;
+ALTER TABLE ONLY public.employees_workrecord DROP CONSTRAINT employees_workrecord_user_id_1256c74d_fk_auth_user_id;
+ALTER TABLE ONLY public.employees_workrecord DROP CONSTRAINT employees_workrecord_department_id_e9a7a76c_fk_employees;
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT employees_employee_user_id_27bed289_fk_auth_user_id;
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT "employees_employee_userType_id_06d2cc4e_fk_employees";
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT employees_employee_designation_id_00c584d7_fk_employees;
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT employees_employee_department_id_410c23c8_fk_employees;
+ALTER TABLE ONLY public.employees_department DROP CONSTRAINT employees_department_faculty_id_4d45a28c_fk_employees;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm;
+DROP INDEX public.products_status_slug_2a6b1e2b_like;
+DROP INDEX public.products_status_slug_2a6b1e2b;
+DROP INDEX public.products_repairitem_repair_id_01dad6af;
+DROP INDEX public.products_repairitem_product_item_id_20122b1f;
+DROP INDEX public.products_repair_res_employee_id_26382dfd;
+DROP INDEX public.products_property_product_id_id_606b9fac;
+DROP INDEX public.products_productitem_status_id_7656f2ac;
+DROP INDEX public.products_productitem_slug_1315bccf_like;
+DROP INDEX public.products_productitem_slug_1315bccf;
+DROP INDEX public.products_productitem_resp_emp_id_feddb475;
+DROP INDEX public.products_productitem_product_item_id_28c908fa_like;
+DROP INDEX public.products_productitem_product_id_d6169ae3;
+DROP INDEX public.products_productitem_parent_id_id_f1495936;
+DROP INDEX public.products_productitem_memo_id_0ac60709;
+DROP INDEX public.products_productitem_location_id_0106bf47;
+DROP INDEX public.products_productitem_department_id_2001da23;
+DROP INDEX public.products_productitem_category_id_b1c23f68;
+DROP INDEX public.products_product_slug_70d3148d_like;
+DROP INDEX public.products_product_slug_70d3148d;
+DROP INDEX public.products_personalloanitem_product_item_id_a049a074;
+DROP INDEX public."products_personalloanitem_personalLoan_id_8ec1b257";
+DROP INDEX public.products_personalloan_to_id_id_d8da9c78;
+DROP INDEX public.products_memo_slug_700acf3b_like;
+DROP INDEX public.products_memo_slug_700acf3b;
+DROP INDEX public.products_memo_received_by_id_1127a489;
+DROP INDEX public.products_location_slug_c816fc18_like;
+DROP INDEX public.products_location_slug_c816fc18;
+DROP INDEX public.products_itemassign_product_item_id_8e1c69da;
+DROP INDEX public.products_itemassign_assigned_location_id_46e0741b;
+DROP INDEX public.products_itemassign_assigned_employee_id_1ba294af;
+DROP INDEX public.products_category_slug_c558efae_like;
+DROP INDEX public.products_category_slug_c558efae;
+DROP INDEX public.products_category_parent_id_id_bfe88eb6;
+DROP INDEX public.employees_workrecord_user_id_1256c74d;
+DROP INDEX public.employees_workrecord_slug_ce48fee0_like;
+DROP INDEX public.employees_workrecord_slug_ce48fee0;
+DROP INDEX public.employees_workrecord_department_id_e9a7a76c;
+DROP INDEX public.employees_usertype_slug_fc6004fc_like;
+DROP INDEX public.employees_usertype_slug_fc6004fc;
+DROP INDEX public.employees_faculty_slug_e3d45f18_like;
+DROP INDEX public.employees_faculty_slug_e3d45f18;
+DROP INDEX public."employees_employee_userType_id_06d2cc4e";
+DROP INDEX public.employees_employee_slug_80b650f3_like;
+DROP INDEX public.employees_employee_slug_80b650f3;
+DROP INDEX public.employees_employee_designation_id_00c584d7;
+DROP INDEX public.employees_employee_department_id_410c23c8;
+DROP INDEX public.employees_designation_slug_3b05be22_like;
+DROP INDEX public.employees_designation_slug_3b05be22;
+DROP INDEX public.employees_department_slug_3f622ab4_like;
+DROP INDEX public.employees_department_slug_3f622ab4;
+DROP INDEX public.employees_department_faculty_id_4d45a28c;
+DROP INDEX public.django_session_session_key_c0390e0f_like;
+DROP INDEX public.django_session_expire_date_a5c62663;
+DROP INDEX public.django_admin_log_user_id_c564eba6;
+DROP INDEX public.django_admin_log_content_type_id_c4bce8eb;
+DROP INDEX public.auth_user_username_6821ab7c_like;
+DROP INDEX public.auth_user_user_permissions_user_id_a95ead1b;
+DROP INDEX public.auth_user_user_permissions_permission_id_1fbb5f2c;
+DROP INDEX public.auth_user_groups_user_id_6a12ed8b;
+DROP INDEX public.auth_user_groups_group_id_97559544;
+DROP INDEX public.auth_permission_content_type_id_2f476e4b;
+DROP INDEX public.auth_group_permissions_permission_id_84c5c92e;
+DROP INDEX public.auth_group_permissions_group_id_b120cbf9;
+DROP INDEX public.auth_group_name_a6ea08ec_like;
+ALTER TABLE ONLY public.products_status DROP CONSTRAINT products_status_pkey;
+ALTER TABLE ONLY public.products_repairitem DROP CONSTRAINT products_repairitem_pkey;
+ALTER TABLE ONLY public.products_repair DROP CONSTRAINT products_repair_pkey;
+ALTER TABLE ONLY public.products_property DROP CONSTRAINT products_property_pkey;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_product_item_id_key;
+ALTER TABLE ONLY public.products_productitem DROP CONSTRAINT products_productitem_pkey;
+ALTER TABLE ONLY public.products_product DROP CONSTRAINT products_product_pkey;
+ALTER TABLE ONLY public.products_personalloanitem DROP CONSTRAINT products_personalloanitem_pkey;
+ALTER TABLE ONLY public.products_personalloan DROP CONSTRAINT products_personalloan_pkey;
+ALTER TABLE ONLY public.products_memo DROP CONSTRAINT products_memo_pkey;
+ALTER TABLE ONLY public.products_location DROP CONSTRAINT products_location_pkey;
+ALTER TABLE ONLY public.products_itemassign DROP CONSTRAINT products_itemassign_pkey;
+ALTER TABLE ONLY public.products_category DROP CONSTRAINT products_category_pkey;
+ALTER TABLE ONLY public.employees_workrecord DROP CONSTRAINT employees_workrecord_pkey;
+ALTER TABLE ONLY public.employees_usertype DROP CONSTRAINT employees_usertype_pkey;
+ALTER TABLE ONLY public.employees_faculty DROP CONSTRAINT employees_faculty_pkey;
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT employees_employee_user_id_key;
+ALTER TABLE ONLY public.employees_employee DROP CONSTRAINT employees_employee_pkey;
+ALTER TABLE ONLY public.employees_designation DROP CONSTRAINT employees_designation_pkey;
+ALTER TABLE ONLY public.employees_department DROP CONSTRAINT employees_department_pkey;
+ALTER TABLE ONLY public.django_session DROP CONSTRAINT django_session_pkey;
+ALTER TABLE ONLY public.django_migrations DROP CONSTRAINT django_migrations_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_username_key;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_pkey;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_name_key;
+ALTER TABLE public.products_status ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_repairitem ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_repair ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_property ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_productitem ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_product ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_personalloanitem ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_personalloan ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_memo ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_location ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_itemassign ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.products_category ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_workrecord ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_usertype ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_faculty ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_employee ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_designation ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.employees_department ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_migrations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_content_type ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_admin_log ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_user_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_groups ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_permission ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE public.products_status_id_seq;
+DROP TABLE public.products_status;
+DROP SEQUENCE public.products_repairitem_id_seq;
+DROP TABLE public.products_repairitem;
+DROP SEQUENCE public.products_repair_id_seq;
+DROP TABLE public.products_repair;
+DROP SEQUENCE public.products_property_id_seq;
+DROP TABLE public.products_property;
+DROP SEQUENCE public.products_productitem_id_seq;
+DROP TABLE public.products_productitem;
+DROP SEQUENCE public.products_product_id_seq;
+DROP TABLE public.products_product;
+DROP SEQUENCE public.products_personalloanitem_id_seq;
+DROP TABLE public.products_personalloanitem;
+DROP SEQUENCE public.products_personalloan_id_seq;
+DROP TABLE public.products_personalloan;
+DROP SEQUENCE public.products_memo_id_seq;
+DROP TABLE public.products_memo;
+DROP SEQUENCE public.products_location_id_seq;
+DROP TABLE public.products_location;
+DROP SEQUENCE public.products_itemassign_id_seq;
+DROP TABLE public.products_itemassign;
+DROP SEQUENCE public.products_category_id_seq;
+DROP TABLE public.products_category;
+DROP SEQUENCE public.employees_workrecord_id_seq;
+DROP TABLE public.employees_workrecord;
+DROP SEQUENCE public.employees_usertype_id_seq;
+DROP TABLE public.employees_usertype;
+DROP SEQUENCE public.employees_faculty_id_seq;
+DROP TABLE public.employees_faculty;
+DROP SEQUENCE public.employees_employee_id_seq;
+DROP TABLE public.employees_employee;
+DROP SEQUENCE public.employees_designation_id_seq;
+DROP TABLE public.employees_designation;
+DROP SEQUENCE public.employees_department_id_seq;
+DROP TABLE public.employees_department;
+DROP TABLE public.django_session;
+DROP SEQUENCE public.django_migrations_id_seq;
+DROP TABLE public.django_migrations;
+DROP SEQUENCE public.django_content_type_id_seq;
+DROP TABLE public.django_content_type;
+DROP SEQUENCE public.django_admin_log_id_seq;
+DROP TABLE public.django_admin_log;
+DROP SEQUENCE public.auth_user_user_permissions_id_seq;
+DROP TABLE public.auth_user_user_permissions;
+DROP SEQUENCE public.auth_user_id_seq;
+DROP SEQUENCE public.auth_user_groups_id_seq;
+DROP TABLE public.auth_user_groups;
+DROP TABLE public.auth_user;
+DROP SEQUENCE public.auth_permission_id_seq;
+DROP TABLE public.auth_permission;
+DROP SEQUENCE public.auth_group_permissions_id_seq;
+DROP TABLE public.auth_group_permissions;
+DROP SEQUENCE public.auth_group_id_seq;
+DROP TABLE public.auth_group;
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: employees_department; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_department (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    name character varying(200) NOT NULL,
+    code character varying(20),
+    acronym character varying(200),
+    description text,
+    office_type character varying(10) NOT NULL,
+    slug character varying(50) NOT NULL,
+    faculty_id integer NOT NULL
+);
+
+
+ALTER TABLE public.employees_department OWNER TO postgres;
+
+--
+-- Name: employees_department_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_department_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_department_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_department_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_department_id_seq OWNED BY public.employees_department.id;
+
+
+--
+-- Name: employees_designation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_designation (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    name character varying(200) NOT NULL,
+    description text,
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.employees_designation OWNER TO postgres;
+
+--
+-- Name: employees_designation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_designation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_designation_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_designation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_designation_id_seq OWNED BY public.employees_designation.id;
+
+
+--
+-- Name: employees_employee; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_employee (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    cell_no character varying(20),
+    address text,
+    gender character varying(20),
+    dob date,
+    image character varying(100),
+    employee_no integer,
+    joining_date date,
+    active_status character varying(10) NOT NULL,
+    slug character varying(50) NOT NULL,
+    department_id integer,
+    designation_id integer,
+    user_id integer NOT NULL,
+    "userType_id" integer
+);
+
+
+ALTER TABLE public.employees_employee OWNER TO postgres;
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_employee_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_employee_id_seq OWNED BY public.employees_employee.id;
+
+
+--
+-- Name: employees_faculty; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_faculty (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    name character varying(200) NOT NULL,
+    code character varying(20),
+    acronym character varying(100),
+    description text,
+    office_type character varying(10) NOT NULL,
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.employees_faculty OWNER TO postgres;
+
+--
+-- Name: employees_faculty_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_faculty_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_faculty_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_faculty_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_faculty_id_seq OWNED BY public.employees_faculty.id;
+
+
+--
+-- Name: employees_usertype; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_usertype (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    name character varying(200) NOT NULL,
+    description text,
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.employees_usertype OWNER TO postgres;
+
+--
+-- Name: employees_usertype_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_usertype_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_usertype_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_usertype_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_usertype_id_seq OWNED BY public.employees_usertype.id;
+
+
+--
+-- Name: employees_workrecord; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employees_workrecord (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    modified_at timestamp with time zone,
+    role_name character varying(200) NOT NULL,
+    "isAdditional" boolean NOT NULL,
+    description text,
+    assign_date date,
+    release_date date,
+    slug character varying(50) NOT NULL,
+    department_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.employees_workrecord OWNER TO postgres;
+
+--
+-- Name: employees_workrecord_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employees_workrecord_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_workrecord_id_seq OWNER TO postgres;
+
+--
+-- Name: employees_workrecord_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employees_workrecord_id_seq OWNED BY public.employees_workrecord.id;
+
+
+--
+-- Name: products_category; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_category (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(200) NOT NULL,
+    description text,
+    status character varying(10) NOT NULL,
+    slug character varying(50) NOT NULL,
+    parent_id_id integer
+);
+
+
+ALTER TABLE public.products_category OWNER TO postgres;
+
+--
+-- Name: products_category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_category_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_category_id_seq OWNER TO postgres;
+
+--
+-- Name: products_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_category_id_seq OWNED BY public.products_category.id;
+
+
+--
+-- Name: products_itemassign; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_itemassign (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    description text,
+    assigned_date date,
+    return_date date,
+    assigned_quantity numeric(15,2),
+    assigned_returned_status character varying(10) NOT NULL,
+    assigned_employee_id integer NOT NULL,
+    assigned_location_id integer NOT NULL,
+    product_item_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_itemassign OWNER TO postgres;
+
+--
+-- Name: products_itemassign_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_itemassign_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_itemassign_id_seq OWNER TO postgres;
+
+--
+-- Name: products_itemassign_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_itemassign_id_seq OWNED BY public.products_itemassign.id;
+
+
+--
+-- Name: products_location; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_location (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(255) NOT NULL,
+    description text,
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.products_location OWNER TO postgres;
+
+--
+-- Name: products_location_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_location_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_location_id_seq OWNER TO postgres;
+
+--
+-- Name: products_location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_location_id_seq OWNED BY public.products_location.id;
+
+
+--
+-- Name: products_memo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_memo (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    tender character varying(255) NOT NULL,
+    date date,
+    slug character varying(50) NOT NULL,
+    received_by_id integer
+);
+
+
+ALTER TABLE public.products_memo OWNER TO postgres;
+
+--
+-- Name: products_memo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_memo_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_memo_id_seq OWNER TO postgres;
+
+--
+-- Name: products_memo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_memo_id_seq OWNED BY public.products_memo.id;
+
+
+--
+-- Name: products_personalloan; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_personalloan (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    loan_date date NOT NULL,
+    description text,
+    to_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_personalloan OWNER TO postgres;
+
+--
+-- Name: products_personalloan_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_personalloan_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_personalloan_id_seq OWNER TO postgres;
+
+--
+-- Name: products_personalloan_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_personalloan_id_seq OWNED BY public.products_personalloan.id;
+
+
+--
+-- Name: products_personalloanitem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_personalloanitem (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    loan_pay_off_time timestamp with time zone NOT NULL,
+    description text,
+    status character varying(10) NOT NULL,
+    "personalLoan_id" integer NOT NULL,
+    product_item_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_personalloanitem OWNER TO postgres;
+
+--
+-- Name: products_personalloanitem_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_personalloanitem_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_personalloanitem_id_seq OWNER TO postgres;
+
+--
+-- Name: products_personalloanitem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_personalloanitem_id_seq OWNED BY public.products_personalloanitem.id;
+
+
+--
+-- Name: products_product; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_product (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(200) NOT NULL,
+    country_of_origin character varying(200),
+    brand character varying(200),
+    model character varying(200),
+    description text,
+    image character varying(100),
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.products_product OWNER TO postgres;
+
+--
+-- Name: products_product_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_product_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_product_id_seq OWNER TO postgres;
+
+--
+-- Name: products_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_product_id_seq OWNED BY public.products_product.id;
+
+
+--
+-- Name: products_productitem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_productitem (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(200) NOT NULL,
+    actual_cost numeric(15,2),
+    depreciation numeric(15,2),
+    description text,
+    purchase_date date,
+    serial_no character varying(200),
+    product_item_id character varying(32),
+    product_item_status character varying(20),
+    quantity numeric(15,2),
+    qr_code_key character varying(100),
+    rf_id_key character varying(200),
+    expiry_date date,
+    warranty_type character varying(10),
+    warranty_date date,
+    slug character varying(50) NOT NULL,
+    category_id integer NOT NULL,
+    department_id integer NOT NULL,
+    location_id integer NOT NULL,
+    memo_id integer NOT NULL,
+    parent_id_id integer,
+    product_id integer NOT NULL,
+    resp_emp_id integer NOT NULL,
+    status_id integer
+);
+
+
+ALTER TABLE public.products_productitem OWNER TO postgres;
+
+--
+-- Name: products_productitem_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_productitem_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_productitem_id_seq OWNER TO postgres;
+
+--
+-- Name: products_productitem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_productitem_id_seq OWNED BY public.products_productitem.id;
+
+
+--
+-- Name: products_property; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_property (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(200) NOT NULL,
+    value character varying(200),
+    description text,
+    priority integer,
+    product_id_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_property OWNER TO postgres;
+
+--
+-- Name: products_property_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_property_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_property_id_seq OWNER TO postgres;
+
+--
+-- Name: products_property_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_property_id_seq OWNED BY public.products_property.id;
+
+
+--
+-- Name: products_repair; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_repair (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    repair_request_date date NOT NULL,
+    description text,
+    res_employee_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_repair OWNER TO postgres;
+
+--
+-- Name: products_repair_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_repair_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_repair_id_seq OWNER TO postgres;
+
+--
+-- Name: products_repair_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_repair_id_seq OWNED BY public.products_repair.id;
+
+
+--
+-- Name: products_repairitem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_repairitem (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    delivery_date date NOT NULL,
+    actual_cost numeric(15,2),
+    estimated_cost numeric(15,2),
+    description text,
+    status character varying(10) NOT NULL,
+    repair_location character varying(200),
+    product_item_id integer NOT NULL,
+    repair_id integer NOT NULL
+);
+
+
+ALTER TABLE public.products_repairitem OWNER TO postgres;
+
+--
+-- Name: products_repairitem_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_repairitem_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_repairitem_id_seq OWNER TO postgres;
+
+--
+-- Name: products_repairitem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_repairitem_id_seq OWNED BY public.products_repairitem.id;
+
+
+--
+-- Name: products_status; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products_status (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    modified_at timestamp with time zone NOT NULL,
+    name character varying(200) NOT NULL,
+    description text,
+    slug character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.products_status OWNER TO postgres;
+
+--
+-- Name: products_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_status_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_status_id_seq OWNER TO postgres;
+
+--
+-- Name: products_status_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_status_id_seq OWNED BY public.products_status.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: employees_department id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_department ALTER COLUMN id SET DEFAULT nextval('public.employees_department_id_seq'::regclass);
+
+
+--
+-- Name: employees_designation id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_designation ALTER COLUMN id SET DEFAULT nextval('public.employees_designation_id_seq'::regclass);
+
+
+--
+-- Name: employees_employee id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee ALTER COLUMN id SET DEFAULT nextval('public.employees_employee_id_seq'::regclass);
+
+
+--
+-- Name: employees_faculty id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_faculty ALTER COLUMN id SET DEFAULT nextval('public.employees_faculty_id_seq'::regclass);
+
+
+--
+-- Name: employees_usertype id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_usertype ALTER COLUMN id SET DEFAULT nextval('public.employees_usertype_id_seq'::regclass);
+
+
+--
+-- Name: employees_workrecord id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_workrecord ALTER COLUMN id SET DEFAULT nextval('public.employees_workrecord_id_seq'::regclass);
+
+
+--
+-- Name: products_category id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_category ALTER COLUMN id SET DEFAULT nextval('public.products_category_id_seq'::regclass);
+
+
+--
+-- Name: products_itemassign id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_itemassign ALTER COLUMN id SET DEFAULT nextval('public.products_itemassign_id_seq'::regclass);
+
+
+--
+-- Name: products_location id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_location ALTER COLUMN id SET DEFAULT nextval('public.products_location_id_seq'::regclass);
+
+
+--
+-- Name: products_memo id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_memo ALTER COLUMN id SET DEFAULT nextval('public.products_memo_id_seq'::regclass);
+
+
+--
+-- Name: products_personalloan id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloan ALTER COLUMN id SET DEFAULT nextval('public.products_personalloan_id_seq'::regclass);
+
+
+--
+-- Name: products_personalloanitem id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloanitem ALTER COLUMN id SET DEFAULT nextval('public.products_personalloanitem_id_seq'::regclass);
+
+
+--
+-- Name: products_product id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_product ALTER COLUMN id SET DEFAULT nextval('public.products_product_id_seq'::regclass);
+
+
+--
+-- Name: products_productitem id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem ALTER COLUMN id SET DEFAULT nextval('public.products_productitem_id_seq'::regclass);
+
+
+--
+-- Name: products_property id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_property ALTER COLUMN id SET DEFAULT nextval('public.products_property_id_seq'::regclass);
+
+
+--
+-- Name: products_repair id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repair ALTER COLUMN id SET DEFAULT nextval('public.products_repair_id_seq'::regclass);
+
+
+--
+-- Name: products_repairitem id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repairitem ALTER COLUMN id SET DEFAULT nextval('public.products_repairitem_id_seq'::regclass);
+
+
+--
+-- Name: products_status id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_status ALTER COLUMN id SET DEFAULT nextval('public.products_status_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add faculty	7	add_faculty
+26	Can change faculty	7	change_faculty
+27	Can delete faculty	7	delete_faculty
+28	Can view faculty	7	view_faculty
+29	Can add department	8	add_department
+30	Can change department	8	change_department
+31	Can delete department	8	delete_department
+32	Can view department	8	view_department
+33	Can add user type	9	add_usertype
+34	Can change user type	9	change_usertype
+35	Can delete user type	9	delete_usertype
+36	Can view user type	9	view_usertype
+37	Can add designation	10	add_designation
+38	Can change designation	10	change_designation
+39	Can delete designation	10	delete_designation
+40	Can view designation	10	view_designation
+41	Can add work record	11	add_workrecord
+42	Can change work record	11	change_workrecord
+43	Can delete work record	11	delete_workrecord
+44	Can view work record	11	view_workrecord
+45	Can add employee	12	add_employee
+46	Can change employee	12	change_employee
+47	Can delete employee	12	delete_employee
+48	Can view employee	12	view_employee
+49	Can add category	13	add_category
+50	Can change category	13	change_category
+51	Can delete category	13	delete_category
+52	Can view category	13	view_category
+53	Can add product	14	add_product
+54	Can change product	14	change_product
+55	Can delete product	14	delete_product
+56	Can view product	14	view_product
+57	Can add status	15	add_status
+58	Can change status	15	change_status
+59	Can delete status	15	delete_status
+60	Can view status	15	view_status
+61	Can add location	16	add_location
+62	Can change location	16	change_location
+63	Can delete location	16	delete_location
+64	Can view location	16	view_location
+65	Can add memo	17	add_memo
+66	Can change memo	17	change_memo
+67	Can delete memo	17	delete_memo
+68	Can view memo	17	view_memo
+69	Can add product item	18	add_productitem
+70	Can change product item	18	change_productitem
+71	Can delete product item	18	delete_productitem
+72	Can view product item	18	view_productitem
+73	Can add property	19	add_property
+74	Can change property	19	change_property
+75	Can delete property	19	delete_property
+76	Can view property	19	view_property
+77	Can add item assign	20	add_itemassign
+78	Can change item assign	20	change_itemassign
+79	Can delete item assign	20	delete_itemassign
+80	Can view item assign	20	view_itemassign
+81	Can add personal loan	21	add_personalloan
+82	Can change personal loan	21	change_personalloan
+83	Can delete personal loan	21	delete_personalloan
+84	Can view personal loan	21	view_personalloan
+85	Can add personal loan item	22	add_personalloanitem
+86	Can change personal loan item	22	change_personalloanitem
+87	Can delete personal loan item	22	delete_personalloanitem
+88	Can view personal loan item	22	view_personalloanitem
+89	Can add repair	23	add_repair
+90	Can change repair	23	change_repair
+91	Can delete repair	23	delete_repair
+92	Can view repair	23	view_repair
+93	Can add repair item	24	add_repairitem
+94	Can change repair item	24	change_repairitem
+95	Can delete repair item	24	delete_repairitem
+96	Can view repair item	24	view_repairitem
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+2	pbkdf2_sha256$180000$rPCKbWqb6aZI$2P9ymuNZMO5SWR0DddywaE8CVk/C+fI/55wXNDvjaR0=	\N	f	masud	Imran	Masud	masud@duet.ac.bd	t	t	2020-11-23 11:52:17.078959+06
+1	pbkdf2_sha256$180000$BT1KTbhary2L$Kkwl22q4ju7WiyiQtWZzI4UsL87C3ufWLg0NrbnzTPo=	2020-11-23 11:52:23.948709+06	t	sorwar	Md. Sorwar	Alam	sorwar@duet.ac.bd	t	t	2020-11-23 11:52:16.931652+06
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	employees	faculty
+8	employees	department
+9	employees	usertype
+10	employees	designation
+11	employees	workrecord
+12	employees	employee
+13	products	category
+14	products	product
+15	products	status
+16	products	location
+17	products	memo
+18	products	productitem
+19	products	property
+20	products	itemassign
+21	products	personalloan
+22	products	personalloanitem
+23	products	repair
+24	products	repairitem
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-11-23 10:27:49.066051+06
+2	auth	0001_initial	2020-11-23 10:27:49.34484+06
+3	admin	0001_initial	2020-11-23 10:27:49.805168+06
+4	admin	0002_logentry_remove_auto_add	2020-11-23 10:27:49.892465+06
+5	admin	0003_logentry_add_action_flag_choices	2020-11-23 10:27:49.919753+06
+6	contenttypes	0002_remove_content_type_name	2020-11-23 10:27:49.95104+06
+7	auth	0002_alter_permission_name_max_length	2020-11-23 10:27:49.970777+06
+8	auth	0003_alter_user_email_max_length	2020-11-23 10:27:49.98305+06
+9	auth	0004_alter_user_username_opts	2020-11-23 10:27:49.999437+06
+10	auth	0005_alter_user_last_login_null	2020-11-23 10:27:50.016454+06
+11	auth	0006_require_contenttypes_0002	2020-11-23 10:27:50.027181+06
+12	auth	0007_alter_validators_add_error_messages	2020-11-23 10:27:50.050676+06
+13	auth	0008_alter_user_username_max_length	2020-11-23 10:27:50.122092+06
+14	auth	0009_alter_user_last_name_max_length	2020-11-23 10:27:50.15109+06
+15	auth	0010_alter_group_name_max_length	2020-11-23 10:27:50.175999+06
+16	auth	0011_update_proxy_permissions	2020-11-23 10:27:50.200007+06
+17	employees	0001_initial	2020-11-23 10:27:50.755012+06
+18	employees	0002_auto_20201123_0427	2020-11-23 10:27:51.697371+06
+19	products	0001_initial	2020-11-23 10:27:52.928776+06
+20	products	0002_auto_20201123_0427	2020-11-23 10:27:55.545154+06
+21	sessions	0001_initial	2020-11-23 10:27:56.066641+06
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+iu7wxq2u2on2accu79dm9s10eieoavy6	ZTZiN2ZiMTYzZjdmYTBhZGRlZmNmZjk5NDY2NTcwM2E3ZDIxZDJmODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJmYTYyZGViZTQzMDc4NjkwNjA3ZWYxZDFjY2ZkNTc0YzYwMTMwNTM1In0=	2020-12-07 11:52:24.030871+06
+\.
+
+
+--
+-- Data for Name: employees_department; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_department (id, created_at, modified_at, name, code, acronym, description, office_type, slug, faculty_id) FROM stdin;
+1	2020-11-23 11:50:32.920487+06	2020-11-23 11:50:32.920529+06	Computer Science and Engineering	\N	CSE	\N	ac	computer-science-and-engineering	2
+2	2020-11-23 11:50:32.932557+06	2020-11-23 11:50:32.932602+06	Electrical Electronics Engineering	\N	EEE	\N	ac	electrical-electronics-engineering	2
+3	2020-11-23 11:50:32.940855+06	2020-11-23 11:50:32.940901+06	Mechanical Engineering	\N	ME	\N	ac	mechanical-engineering	3
+4	2020-11-23 11:50:32.949278+06	2020-11-23 11:50:32.949324+06	Civil Engineering	\N	CE	\N	ac	civil-engineering	1
+5	2020-11-23 11:50:32.957604+06	2020-11-23 11:50:32.95765+06	Textile Engineering	\N	TE	\N	ac	textile-engineering	3
+6	2020-11-23 11:50:32.965786+06	2020-11-23 11:50:32.965833+06	Industrial Production Engineering	\N	IPE	\N	ac	industrial-production-engineering	3
+7	2020-11-23 11:50:32.974279+06	2020-11-23 11:50:32.974327+06	Architecture	\N	ARCH	\N	ac	architecture	1
+8	2020-11-23 11:50:32.982489+06	2020-11-23 11:50:32.982536+06	Exam Section	\N	\N	\N	ad	exam-section	5
+9	2020-11-23 11:50:32.99079+06	2020-11-23 11:50:32.990835+06	Controller Section	\N	\N	\N	ad	controller-section	5
+10	2020-11-23 11:50:32.999226+06	2020-11-23 11:50:32.99927+06	ICT Cell	\N	\N	\N	ad	ict-cell	5
+11	2020-11-23 11:50:33.007578+06	2020-11-23 11:50:33.007624+06	Transport Section	\N	\N	\N	ad	transport-section	6
+\.
+
+
+--
+-- Data for Name: employees_designation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_designation (id, created_at, modified_at, name, description, slug) FROM stdin;
+1	2020-11-23 11:50:32.763362+06	2020-11-23 11:50:32.763383+06	Professor	\N	professor
+2	2020-11-23 11:50:32.773524+06	2020-11-23 11:50:32.773545+06	Associate Professor	\N	associate-professor
+3	2020-11-23 11:50:32.781698+06	2020-11-23 11:50:32.781718+06	Assistant Professor	\N	assistant-professor
+4	2020-11-23 11:50:32.78999+06	2020-11-23 11:50:32.790009+06	Lecturer	\N	lecturer
+5	2020-11-23 11:50:32.79847+06	2020-11-23 11:50:32.798488+06	Deputy Registrar	\N	deputy-registrar
+6	2020-11-23 11:50:32.806881+06	2020-11-23 11:50:32.806909+06	System Analyst	\N	system-analyst
+7	2020-11-23 11:50:32.815289+06	2020-11-23 11:50:32.815314+06	Assistant Programmer	\N	assistant-programmer
+8	2020-11-23 11:50:32.824116+06	2020-11-23 11:50:32.824148+06	Assistant Maintenance Engineer	\N	assistant-maintenance-engineer
+9	2020-11-23 11:50:32.832174+06	2020-11-23 11:50:32.832211+06	Junior Maintenance Officer	\N	junior-maintenance-officer
+10	2020-11-23 11:50:32.840627+06	2020-11-23 11:50:32.840674+06	Assistant Section Officer	\N	assistant-section-officer
+11	2020-11-23 11:50:32.849192+06	2020-11-23 11:50:32.849239+06	System Analyst	\N	system-analyst
+\.
+
+
+--
+-- Data for Name: employees_employee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_employee (id, created_at, modified_at, cell_no, address, gender, dob, image, employee_no, joining_date, active_status, slug, department_id, designation_id, user_id, "userType_id") FROM stdin;
+1	2020-11-23 11:52:17.063272+06	2020-11-23 11:52:17.06329+06	\N	\N	\N	\N	employee/avatar.png	\N	\N	active	sorwar	\N	\N	1	\N
+2	2020-11-23 11:52:17.188033+06	2020-11-23 11:52:17.188052+06	\N	\N	\N	\N	employee/avatar.png	\N	\N	active	masud	\N	\N	2	\N
+\.
+
+
+--
+-- Data for Name: employees_faculty; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_faculty (id, created_at, modified_at, name, code, acronym, description, office_type, slug) FROM stdin;
+1	2020-11-23 11:50:32.857709+06	2020-11-23 11:50:32.857755+06	Civil Engineering	\N	\N	\N	ac	civil-engineering
+2	2020-11-23 11:50:32.865788+06	2020-11-23 11:50:32.865835+06	Electrical Electronic Engineering	\N	\N	\N	ac	electrical-electronic-engineering
+3	2020-11-23 11:50:32.874056+06	2020-11-23 11:50:32.874101+06	Mechanical Engineering	\N	\N	\N	ac	mechanical-engineering
+4	2020-11-23 11:50:32.882251+06	2020-11-23 11:50:32.882296+06	science	\N	\N	\N	ac	science
+5	2020-11-23 11:50:32.890681+06	2020-11-23 11:53:01.418681+06	Administrative Offices	\N	\N		ad	administrative-offices
+6	2020-11-23 11:50:32.899105+06	2020-11-23 11:53:10.380017+06	Office of the Directors	\N	\N		ad	office-of-the-directors
+\.
+
+
+--
+-- Data for Name: employees_usertype; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_usertype (id, created_at, modified_at, name, description, slug) FROM stdin;
+1	2020-11-23 11:50:33.016143+06	2020-11-23 11:50:33.016186+06	Teacher	\N	teacher
+2	2020-11-23 11:50:33.024026+06	2020-11-23 11:50:33.024071+06	Officer	\N	officer
+3	2020-11-23 11:50:33.032402+06	2020-11-23 11:50:33.032449+06	Staff	\N	staff
+\.
+
+
+--
+-- Data for Name: employees_workrecord; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employees_workrecord (id, created_at, modified_at, role_name, "isAdditional", description, assign_date, release_date, slug, department_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_category; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_category (id, created_at, modified_at, name, description, status, slug, parent_id_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_itemassign; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_itemassign (id, created_at, modified_at, description, assigned_date, return_date, assigned_quantity, assigned_returned_status, assigned_employee_id, assigned_location_id, product_item_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_location; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_location (id, created_at, modified_at, name, description, slug) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_memo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_memo (id, created_at, modified_at, tender, date, slug, received_by_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_personalloan; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_personalloan (id, created_at, modified_at, loan_date, description, to_id_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_personalloanitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_personalloanitem (id, created_at, modified_at, loan_pay_off_time, description, status, "personalLoan_id", product_item_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_product (id, created_at, modified_at, name, country_of_origin, brand, model, description, image, slug) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_productitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_productitem (id, created_at, modified_at, name, actual_cost, depreciation, description, purchase_date, serial_no, product_item_id, product_item_status, quantity, qr_code_key, rf_id_key, expiry_date, warranty_type, warranty_date, slug, category_id, department_id, location_id, memo_id, parent_id_id, product_id, resp_emp_id, status_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_property; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_property (id, created_at, modified_at, name, value, description, priority, product_id_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_repair; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_repair (id, created_at, modified_at, repair_request_date, description, res_employee_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_repairitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_repairitem (id, created_at, modified_at, delivery_date, actual_cost, estimated_cost, description, status, repair_location, product_item_id, repair_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: products_status; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products_status (id, created_at, modified_at, name, description, slug) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 96, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 24, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 21, true);
+
+
+--
+-- Name: employees_department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_department_id_seq', 11, true);
+
+
+--
+-- Name: employees_designation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_designation_id_seq', 11, true);
+
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_employee_id_seq', 2, true);
+
+
+--
+-- Name: employees_faculty_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_faculty_id_seq', 6, true);
+
+
+--
+-- Name: employees_usertype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_usertype_id_seq', 3, true);
+
+
+--
+-- Name: employees_workrecord_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employees_workrecord_id_seq', 1, false);
+
+
+--
+-- Name: products_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_category_id_seq', 1, false);
+
+
+--
+-- Name: products_itemassign_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_itemassign_id_seq', 1, false);
+
+
+--
+-- Name: products_location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_location_id_seq', 1, false);
+
+
+--
+-- Name: products_memo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_memo_id_seq', 1, false);
+
+
+--
+-- Name: products_personalloan_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_personalloan_id_seq', 1, false);
+
+
+--
+-- Name: products_personalloanitem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_personalloanitem_id_seq', 1, false);
+
+
+--
+-- Name: products_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_product_id_seq', 1, false);
+
+
+--
+-- Name: products_productitem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_productitem_id_seq', 1, false);
+
+
+--
+-- Name: products_property_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_property_id_seq', 1, false);
+
+
+--
+-- Name: products_repair_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_repair_id_seq', 1, false);
+
+
+--
+-- Name: products_repairitem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_repairitem_id_seq', 1, false);
+
+
+--
+-- Name: products_status_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_status_id_seq', 1, false);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: employees_department employees_department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_department
+    ADD CONSTRAINT employees_department_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_designation employees_designation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_designation
+    ADD CONSTRAINT employees_designation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_employee employees_employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT employees_employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_employee employees_employee_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT employees_employee_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: employees_faculty employees_faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_faculty
+    ADD CONSTRAINT employees_faculty_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_usertype employees_usertype_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_usertype
+    ADD CONSTRAINT employees_usertype_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_workrecord employees_workrecord_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_workrecord
+    ADD CONSTRAINT employees_workrecord_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_category products_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_category
+    ADD CONSTRAINT products_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_itemassign products_itemassign_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_itemassign
+    ADD CONSTRAINT products_itemassign_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_location products_location_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_location
+    ADD CONSTRAINT products_location_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_memo products_memo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_memo
+    ADD CONSTRAINT products_memo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_personalloan products_personalloan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloan
+    ADD CONSTRAINT products_personalloan_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_personalloanitem products_personalloanitem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloanitem
+    ADD CONSTRAINT products_personalloanitem_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_product products_product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_product
+    ADD CONSTRAINT products_product_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_productitem products_productitem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_productitem products_productitem_product_item_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_product_item_id_key UNIQUE (product_item_id);
+
+
+--
+-- Name: products_property products_property_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_property
+    ADD CONSTRAINT products_property_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_repair products_repair_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repair
+    ADD CONSTRAINT products_repair_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_repairitem products_repairitem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repairitem
+    ADD CONSTRAINT products_repairitem_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products_status products_status_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_status
+    ADD CONSTRAINT products_status_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: employees_department_faculty_id_4d45a28c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_department_faculty_id_4d45a28c ON public.employees_department USING btree (faculty_id);
+
+
+--
+-- Name: employees_department_slug_3f622ab4; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_department_slug_3f622ab4 ON public.employees_department USING btree (slug);
+
+
+--
+-- Name: employees_department_slug_3f622ab4_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_department_slug_3f622ab4_like ON public.employees_department USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_designation_slug_3b05be22; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_designation_slug_3b05be22 ON public.employees_designation USING btree (slug);
+
+
+--
+-- Name: employees_designation_slug_3b05be22_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_designation_slug_3b05be22_like ON public.employees_designation USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_employee_department_id_410c23c8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_employee_department_id_410c23c8 ON public.employees_employee USING btree (department_id);
+
+
+--
+-- Name: employees_employee_designation_id_00c584d7; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_employee_designation_id_00c584d7 ON public.employees_employee USING btree (designation_id);
+
+
+--
+-- Name: employees_employee_slug_80b650f3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_employee_slug_80b650f3 ON public.employees_employee USING btree (slug);
+
+
+--
+-- Name: employees_employee_slug_80b650f3_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_employee_slug_80b650f3_like ON public.employees_employee USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_employee_userType_id_06d2cc4e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "employees_employee_userType_id_06d2cc4e" ON public.employees_employee USING btree ("userType_id");
+
+
+--
+-- Name: employees_faculty_slug_e3d45f18; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_faculty_slug_e3d45f18 ON public.employees_faculty USING btree (slug);
+
+
+--
+-- Name: employees_faculty_slug_e3d45f18_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_faculty_slug_e3d45f18_like ON public.employees_faculty USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_usertype_slug_fc6004fc; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_usertype_slug_fc6004fc ON public.employees_usertype USING btree (slug);
+
+
+--
+-- Name: employees_usertype_slug_fc6004fc_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_usertype_slug_fc6004fc_like ON public.employees_usertype USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_workrecord_department_id_e9a7a76c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_workrecord_department_id_e9a7a76c ON public.employees_workrecord USING btree (department_id);
+
+
+--
+-- Name: employees_workrecord_slug_ce48fee0; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_workrecord_slug_ce48fee0 ON public.employees_workrecord USING btree (slug);
+
+
+--
+-- Name: employees_workrecord_slug_ce48fee0_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_workrecord_slug_ce48fee0_like ON public.employees_workrecord USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: employees_workrecord_user_id_1256c74d; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX employees_workrecord_user_id_1256c74d ON public.employees_workrecord USING btree (user_id);
+
+
+--
+-- Name: products_category_parent_id_id_bfe88eb6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_category_parent_id_id_bfe88eb6 ON public.products_category USING btree (parent_id_id);
+
+
+--
+-- Name: products_category_slug_c558efae; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_category_slug_c558efae ON public.products_category USING btree (slug);
+
+
+--
+-- Name: products_category_slug_c558efae_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_category_slug_c558efae_like ON public.products_category USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: products_itemassign_assigned_employee_id_1ba294af; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_itemassign_assigned_employee_id_1ba294af ON public.products_itemassign USING btree (assigned_employee_id);
+
+
+--
+-- Name: products_itemassign_assigned_location_id_46e0741b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_itemassign_assigned_location_id_46e0741b ON public.products_itemassign USING btree (assigned_location_id);
+
+
+--
+-- Name: products_itemassign_product_item_id_8e1c69da; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_itemassign_product_item_id_8e1c69da ON public.products_itemassign USING btree (product_item_id);
+
+
+--
+-- Name: products_location_slug_c816fc18; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_location_slug_c816fc18 ON public.products_location USING btree (slug);
+
+
+--
+-- Name: products_location_slug_c816fc18_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_location_slug_c816fc18_like ON public.products_location USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: products_memo_received_by_id_1127a489; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_memo_received_by_id_1127a489 ON public.products_memo USING btree (received_by_id);
+
+
+--
+-- Name: products_memo_slug_700acf3b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_memo_slug_700acf3b ON public.products_memo USING btree (slug);
+
+
+--
+-- Name: products_memo_slug_700acf3b_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_memo_slug_700acf3b_like ON public.products_memo USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: products_personalloan_to_id_id_d8da9c78; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_personalloan_to_id_id_d8da9c78 ON public.products_personalloan USING btree (to_id_id);
+
+
+--
+-- Name: products_personalloanitem_personalLoan_id_8ec1b257; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "products_personalloanitem_personalLoan_id_8ec1b257" ON public.products_personalloanitem USING btree ("personalLoan_id");
+
+
+--
+-- Name: products_personalloanitem_product_item_id_a049a074; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_personalloanitem_product_item_id_a049a074 ON public.products_personalloanitem USING btree (product_item_id);
+
+
+--
+-- Name: products_product_slug_70d3148d; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_product_slug_70d3148d ON public.products_product USING btree (slug);
+
+
+--
+-- Name: products_product_slug_70d3148d_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_product_slug_70d3148d_like ON public.products_product USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: products_productitem_category_id_b1c23f68; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_category_id_b1c23f68 ON public.products_productitem USING btree (category_id);
+
+
+--
+-- Name: products_productitem_department_id_2001da23; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_department_id_2001da23 ON public.products_productitem USING btree (department_id);
+
+
+--
+-- Name: products_productitem_location_id_0106bf47; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_location_id_0106bf47 ON public.products_productitem USING btree (location_id);
+
+
+--
+-- Name: products_productitem_memo_id_0ac60709; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_memo_id_0ac60709 ON public.products_productitem USING btree (memo_id);
+
+
+--
+-- Name: products_productitem_parent_id_id_f1495936; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_parent_id_id_f1495936 ON public.products_productitem USING btree (parent_id_id);
+
+
+--
+-- Name: products_productitem_product_id_d6169ae3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_product_id_d6169ae3 ON public.products_productitem USING btree (product_id);
+
+
+--
+-- Name: products_productitem_product_item_id_28c908fa_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_product_item_id_28c908fa_like ON public.products_productitem USING btree (product_item_id varchar_pattern_ops);
+
+
+--
+-- Name: products_productitem_resp_emp_id_feddb475; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_resp_emp_id_feddb475 ON public.products_productitem USING btree (resp_emp_id);
+
+
+--
+-- Name: products_productitem_slug_1315bccf; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_slug_1315bccf ON public.products_productitem USING btree (slug);
+
+
+--
+-- Name: products_productitem_slug_1315bccf_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_slug_1315bccf_like ON public.products_productitem USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: products_productitem_status_id_7656f2ac; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_productitem_status_id_7656f2ac ON public.products_productitem USING btree (status_id);
+
+
+--
+-- Name: products_property_product_id_id_606b9fac; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_property_product_id_id_606b9fac ON public.products_property USING btree (product_id_id);
+
+
+--
+-- Name: products_repair_res_employee_id_26382dfd; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_repair_res_employee_id_26382dfd ON public.products_repair USING btree (res_employee_id);
+
+
+--
+-- Name: products_repairitem_product_item_id_20122b1f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_repairitem_product_item_id_20122b1f ON public.products_repairitem USING btree (product_item_id);
+
+
+--
+-- Name: products_repairitem_repair_id_01dad6af; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_repairitem_repair_id_01dad6af ON public.products_repairitem USING btree (repair_id);
+
+
+--
+-- Name: products_status_slug_2a6b1e2b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_status_slug_2a6b1e2b ON public.products_status USING btree (slug);
+
+
+--
+-- Name: products_status_slug_2a6b1e2b_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX products_status_slug_2a6b1e2b_like ON public.products_status USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_department employees_department_faculty_id_4d45a28c_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_department
+    ADD CONSTRAINT employees_department_faculty_id_4d45a28c_fk_employees FOREIGN KEY (faculty_id) REFERENCES public.employees_faculty(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_employee employees_employee_department_id_410c23c8_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT employees_employee_department_id_410c23c8_fk_employees FOREIGN KEY (department_id) REFERENCES public.employees_department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_employee employees_employee_designation_id_00c584d7_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT employees_employee_designation_id_00c584d7_fk_employees FOREIGN KEY (designation_id) REFERENCES public.employees_designation(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_employee employees_employee_userType_id_06d2cc4e_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT "employees_employee_userType_id_06d2cc4e_fk_employees" FOREIGN KEY ("userType_id") REFERENCES public.employees_usertype(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_employee employees_employee_user_id_27bed289_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_employee
+    ADD CONSTRAINT employees_employee_user_id_27bed289_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_workrecord employees_workrecord_department_id_e9a7a76c_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_workrecord
+    ADD CONSTRAINT employees_workrecord_department_id_e9a7a76c_fk_employees FOREIGN KEY (department_id) REFERENCES public.employees_department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: employees_workrecord employees_workrecord_user_id_1256c74d_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employees_workrecord
+    ADD CONSTRAINT employees_workrecord_user_id_1256c74d_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_category products_category_parent_id_id_bfe88eb6_fk_products_category_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_category
+    ADD CONSTRAINT products_category_parent_id_id_bfe88eb6_fk_products_category_id FOREIGN KEY (parent_id_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_itemassign products_itemassign_assigned_employee_id_1ba294af_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_itemassign
+    ADD CONSTRAINT products_itemassign_assigned_employee_id_1ba294af_fk_auth_user FOREIGN KEY (assigned_employee_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_itemassign products_itemassign_assigned_location_id_46e0741b_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_itemassign
+    ADD CONSTRAINT products_itemassign_assigned_location_id_46e0741b_fk_products_ FOREIGN KEY (assigned_location_id) REFERENCES public.products_location(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_itemassign products_itemassign_product_item_id_8e1c69da_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_itemassign
+    ADD CONSTRAINT products_itemassign_product_item_id_8e1c69da_fk_products_ FOREIGN KEY (product_item_id) REFERENCES public.products_productitem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_memo products_memo_received_by_id_1127a489_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_memo
+    ADD CONSTRAINT products_memo_received_by_id_1127a489_fk_auth_user_id FOREIGN KEY (received_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_personalloanitem products_personalloa_personalLoan_id_8ec1b257_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloanitem
+    ADD CONSTRAINT "products_personalloa_personalLoan_id_8ec1b257_fk_products_" FOREIGN KEY ("personalLoan_id") REFERENCES public.products_personalloan(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_personalloanitem products_personalloa_product_item_id_a049a074_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloanitem
+    ADD CONSTRAINT products_personalloa_product_item_id_a049a074_fk_products_ FOREIGN KEY (product_item_id) REFERENCES public.products_productitem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_personalloan products_personalloan_to_id_id_d8da9c78_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_personalloan
+    ADD CONSTRAINT products_personalloan_to_id_id_d8da9c78_fk_auth_user_id FOREIGN KEY (to_id_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_category_id_b1c23f68_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_category_id_b1c23f68_fk_products_ FOREIGN KEY (category_id) REFERENCES public.products_category(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_department_id_2001da23_fk_employees; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_department_id_2001da23_fk_employees FOREIGN KEY (department_id) REFERENCES public.employees_department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_location_id_0106bf47_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_location_id_0106bf47_fk_products_ FOREIGN KEY (location_id) REFERENCES public.products_location(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_memo_id_0ac60709_fk_products_memo_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_memo_id_0ac60709_fk_products_memo_id FOREIGN KEY (memo_id) REFERENCES public.products_memo(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_parent_id_id_f1495936_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_parent_id_id_f1495936_fk_products_ FOREIGN KEY (parent_id_id) REFERENCES public.products_productitem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_product_id_d6169ae3_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_product_id_d6169ae3_fk_products_product_id FOREIGN KEY (product_id) REFERENCES public.products_product(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_resp_emp_id_feddb475_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_resp_emp_id_feddb475_fk_auth_user_id FOREIGN KEY (resp_emp_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_productitem products_productitem_status_id_7656f2ac_fk_products_status_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_productitem
+    ADD CONSTRAINT products_productitem_status_id_7656f2ac_fk_products_status_id FOREIGN KEY (status_id) REFERENCES public.products_status(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_property products_property_product_id_id_606b9fac_fk_products_product_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_property
+    ADD CONSTRAINT products_property_product_id_id_606b9fac_fk_products_product_id FOREIGN KEY (product_id_id) REFERENCES public.products_product(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_repair products_repair_res_employee_id_26382dfd_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repair
+    ADD CONSTRAINT products_repair_res_employee_id_26382dfd_fk_auth_user_id FOREIGN KEY (res_employee_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_repairitem products_repairitem_product_item_id_20122b1f_fk_products_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repairitem
+    ADD CONSTRAINT products_repairitem_product_item_id_20122b1f_fk_products_ FOREIGN KEY (product_item_id) REFERENCES public.products_productitem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: products_repairitem products_repairitem_repair_id_01dad6af_fk_products_repair_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products_repairitem
+    ADD CONSTRAINT products_repairitem_repair_id_01dad6af_fk_products_repair_id FOREIGN KEY (repair_id) REFERENCES public.products_repair(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

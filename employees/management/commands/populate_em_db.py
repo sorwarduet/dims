@@ -54,8 +54,13 @@ class Command(BaseCommand):
 
 
     def _create_employee(self):
+        emp2 = User(username='sorwar', email='sorwar@duet.ac.bd', first_name='Md. Sorwar', last_name='Alam', is_staff=True, is_superuser=True)
+        emp2.set_password('1234')
+        emp2.save()
 
-        User(username='masud', email='masud@duet.ac.bd', first_name='Imran', last_name='Masud', password='1234', is_staff=True).save()
+        emp1 = User(username='masud', email='masud@duet.ac.bd', first_name='Imran', last_name='Masud', is_staff=True)
+        emp1.set_password('1234')
+        emp1.save()
 
 
     def handle(self, *args, **options):
