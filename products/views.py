@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # local model
-from .models import Category, Product, Location, Status, Memo, ProductItem
+from .models import Category, Product, Location, Status, Memo, ProductItem, Property
 from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm
 
 
@@ -184,3 +184,32 @@ class ProductItemDeleteView(DeleteView):
     model = ProductItem
     context_object_name = 'product_item'
     success_url = reverse_lazy('product_item_list')
+
+# Property View
+
+
+class ProductPropertyListView(ListView):
+    template_name = 'products/product-property/list.html'
+    model = Property
+    context_object_name = "properties"
+
+
+class ProductPropertyCreateView(CreateView):
+    template_name = 'products/product-property/add.html'
+    model = Property
+    form_class = ProductItemForm
+    success_url = reverse_lazy('product_property_list')
+
+
+class ProductPropertyUpdateView(UpdateView):
+    template_name = 'products/product-property/edit.html'
+    model = Property
+    form_class = ProductItemForm
+    success_url = reverse_lazy('product_property_list')
+
+
+class ProductPropertyDeleteView(DeleteView):
+    template_name = 'products/product-property/delete.html'
+    model = Property
+    context_object_name = 'property'
+    success_url = reverse_lazy('product_property_list')

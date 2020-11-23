@@ -32,4 +32,9 @@ urlpatterns = [
     path('productItem/update/<int:pk>', ProductItemUpdateView.as_view(), name='product_item_update'),
     path('productItem/delete/<int:pk>', ProductItemDeleteView.as_view(), name='product_item_delete'),
 
+    path('product-property/', ProductPropertyListView.as_view(), name='product_property_list'),
+    path('product-property/create', ProductPropertyCreateView.as_view(), name='product_property_create'),
+    path('product-property/update/<int:pk>', ProductPropertyUpdateView.as_view(), name='product_property_update'),
+    path('product-property/delete/<int:pk>', ProductPropertyDeleteView.as_view(), name='product_property_delete'),
+
 ]
