@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # local model
 from .models import Category, Product, Location, Status, Memo, ProductItem, Property
-from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm
+from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm, ProductPropertyForm
 
 
 # Create your views here.
@@ -197,14 +197,14 @@ class ProductPropertyListView(ListView):
 class ProductPropertyCreateView(CreateView):
     template_name = 'products/product-property/add.html'
     model = Property
-    form_class = ProductItemForm
+    form_class = ProductPropertyForm
     success_url = reverse_lazy('product_property_list')
 
 
 class ProductPropertyUpdateView(UpdateView):
     template_name = 'products/product-property/edit.html'
     model = Property
-    form_class = ProductItemForm
+    form_class = ProductPropertyForm
     success_url = reverse_lazy('product_property_list')
 
 

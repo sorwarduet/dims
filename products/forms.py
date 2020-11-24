@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Product, Location, Memo, Status, ProductItem
+from .models import Category, Product, Location, Memo, Status, ProductItem, Property
 
 
 class DateInput(forms.DateInput):
@@ -126,4 +126,24 @@ class ProductItemForm(forms.ModelForm):
             'product_item_status': forms.Select(attrs={'class': 'form-control',}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter Description '}),
+        }
+
+
+class ProductPropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = (
+            'product_id',
+            'name',
+            'value',
+            'description',
+            'priority',
+
+        )
+        widgets = {
+            'product_id': forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter name'}),
+            'value': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter value'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter value'}),
+            'priority': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Priority'}),
         }
