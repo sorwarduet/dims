@@ -225,3 +225,5 @@ class ProductAssignListView(ListView):
 
 class ProductAssignCreateView(CreateView):
     template_name = 'products/assign/assign_add.html'
+    model = ItemAssign
+    success_url = 'product_assign_list'
