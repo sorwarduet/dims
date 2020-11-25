@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 
 # local model
-from .models import Category, Product, Location, Status, Memo, ProductItem, Property
+from .models import Category, Product, Location, Status, Memo, ProductItem, Property, ItemAssign
 from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm, ProductPropertyForm
 
 
@@ -213,3 +213,15 @@ class ProductPropertyDeleteView(DeleteView):
     model = Property
     context_object_name = 'property'
     success_url = reverse_lazy('product_property_list')
+
+
+#Assgin user
+
+class ProductAssignListView(ListView):
+    template_name = 'products/assign/assign_list.html'
+    model = ItemAssign
+    context_object_name = 'assigns'
+
+
+class ProductAssignCreateView(CreateView):
+    template_name = 'products/assign/assign_add.html'

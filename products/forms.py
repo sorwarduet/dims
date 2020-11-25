@@ -130,6 +130,7 @@ class ProductItemForm(forms.ModelForm):
 
 
 class ProductPropertyForm(forms.ModelForm):
+
     class Meta:
         model = Property
         fields = (
