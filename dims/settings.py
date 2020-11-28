@@ -29,7 +29,7 @@ SECRET_KEY = 'r-w!vmo*0wu51n)9l(i5a&az^v2deiebi2e6see3!3j5x4m6_y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','127.0.0.1', 'duet-inventory.herokuapp.com']
 
 
 # Application definition
