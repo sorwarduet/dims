@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 
 # local model
-from .models import Category, Product, Location, Status, Memo, ProductItem
-from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm
+from .models import Category, Product, Location, Status, Memo, ProductItem, Property, ItemAssign
+from .forms import CategoryForm, ProductForm, LocationForm, StatusForm, MemoForm, ProductItemForm, ProductPropertyForm
 
 
 # Create your views here.
@@ -184,3 +184,46 @@ class ProductItemDeleteView(DeleteView):
     model = ProductItem
     context_object_name = 'product_item'
     success_url = reverse_lazy('product_item_list')
+
+# Property View
+
+
+class ProductPropertyListView(ListView):
+    template_name = 'products/product-property/list.html'
+    model = Property
+    context_object_name = "properties"
+
+
+class ProductPropertyCreateView(CreateView):
+    template_name = 'products/product-property/add.html'
+    model = Property
+    form_class = ProductPropertyForm
+    success_url = reverse_lazy('product_property_list')
+
+
+class ProductPropertyUpdateView(UpdateView):
+    template_name = 'products/product-property/edit.html'
+    model = Property
+    form_class = ProductPropertyForm
+    success_url = reverse_lazy('product_property_list')
+
+
+class ProductPropertyDeleteView(DeleteView):
+    template_name = 'products/product-property/delete.html'
+    model = Property
+    context_object_name = 'property'
+    success_url = reverse_lazy('product_property_list')
+
+
+#Assgin user
+
+class ProductAssignListView(ListView):
+    template_name = 'products/assign/assign_list.html'
+    model = ItemAssign
+    context_object_name = 'assigns'
+
+
+class ProductAssignCreateView(CreateView):
+    template_name = 'products/assign/assign_add.html'
+    model = ItemAssign
+    success_url = 'product_assign_list'

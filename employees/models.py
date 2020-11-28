@@ -49,6 +49,7 @@ class Department(TimeStampedModel):
     faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT, related_name='departments')
     slug = models.SlugField(editable=False)
 
+
     def __str__(self):
         return self.name
 

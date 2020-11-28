@@ -1,13 +1,13 @@
 {% extends '_base.html' %}
-{% block title %}Product List{% endblock %}
+{% block title %}Property List{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Product Table</h3>
+                    <h3 class="card-title">Property list Table</h3>
                     <div class="float-right">
-                        <a class="btn-sm bg-info" href="{% url 'product_create' %}">
+                        <a class="btn-sm bg-info" href="{% url 'product_property_create' %}">
                             <i class="fas fa-plus"></i> Add
                         </a>
                     </div>
@@ -17,36 +17,35 @@
                     <table id="example1" class="table table-bordered table-striped table-sm">
                         <colgroup>
                             <col span="1" style="width: 5%;">
-                            <col span="1" style="width: 15%;">
-                            <col span="1" style="width: 15%;">
-                            <col span="1" style="width: 15%;">
                             <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 10%;">
                             <col span="1" style="width: 15%;">
-                             <col span="1" style="width: 15%;">
                         </colgroup>
                         <thead>
                         <tr>
-                            <td>SL</td>
-                            <th>Name</th>
-                            <th>Country Of Origin</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Image</th>
+                            <th>SL</th>
+                            <th>Product Name</th>
+                            <th>Property Name</th>
+                            <th>Description</th>
+                            <th>Value</th>
+                            <th>Priority</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for product in products %}
+                        {% for property in properties %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.country_of_origin }}</td>
-                                <td>{{ product.brand }}</td>
-                                <td>{{ product.model }}</td>
-                                 <td class="text-center">
-                                     <img src="{{ product.image.url }}" width="60px" height="60px" alt="">
-                                 </td>
+                                <td>{{ property.product_id.name }}</td>
+                                <td>{{ property.name }}</td>
+                                <td>{{ property.description }}</td>
+                                <td>{{ property.value }}</td>
+                                <td>{{ property.priority }}</td>
+
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn-sm btn-info dropdown-toggle"
@@ -54,11 +53,11 @@
                                             Action
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="{% url 'product_update' product.pk %}">
+                                            <a class="dropdown-item" href="{% url 'product_property_update' property.pk %}">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
 
-                                            <a class="dropdown-item" href="{% url 'product_delete' product.pk %}">
+                                            <a class="dropdown-item" href="{% url 'product_property_delete' property.pk %}">
                                                 <i class="fas fa-times"></i> Delete
                                             </a>
 
@@ -70,12 +69,12 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td>SL</td>
-                            <th>Name</th>
-                            <th>Country Of Origin</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Image</th>
+                            <th>SL</th>
+                            <th>Product Name</th>
+                            <th>Property Name</th>
+                            <th>Description</th>
+                            <th>Value</th>
+                            <th>Priority</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>
