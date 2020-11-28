@@ -59,8 +59,8 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        #self._create_designation()
-        #self._create_faculty()
-        #self._create_department()
-        #self._create_user_type()
+        self._create_designation()
+        self._create_faculty()
+        self._create_department()
+        self._create_user_type()
         self._create_employee()
